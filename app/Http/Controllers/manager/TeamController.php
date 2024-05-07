@@ -13,4 +13,10 @@ class TeamController extends Controller
         $teams = Team::all();
         return view('manager.teams.index', compact('teams'));
     }
+
+    public function show(Team $team)
+    {
+        $teams = Team::all();
+        return view('manager.teams.show', compact('team'));
+    }
 }
