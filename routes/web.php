@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\TeamController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,4 +34,12 @@ Route::middleware(['auth', 'ensureAdmin']) // 適用したいMiddleware名（ ap
     ->name('admin.') // 名前付きrouteでURLを呼び出すときの接頭辞（ ex. route('admin.users.index') ）
     ->group(function () {
         Route::resource('/users', UserController::class); // Admin/UserControllerの決められた名前のメソッドに一気に関連づく
+    });
+
+// Team関係
+Route::middleware(['auth']) 
+    ->prefix('manager/teams')
+    ->name('manager.')
+    ->group(function () {
+        Route::get('/', [TeamController::class, 'index'])->name('teams');
     });
