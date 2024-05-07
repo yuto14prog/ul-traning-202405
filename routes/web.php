@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\TeamController;
+use App\Http\Controllers\manager\TeamController;
 
 /*
 |--------------------------------------------------------------------------
