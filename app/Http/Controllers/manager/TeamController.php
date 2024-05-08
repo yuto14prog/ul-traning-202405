@@ -24,4 +24,16 @@ class TeamController extends Controller
     {
         return view('manager.teams.create');
     }
+
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required|max:20',
+            'owner_id' => 'required'
+        ]);
+
+        $team = new Team($validated);
+        $team->save();
+        return to_route('manager.teams.index');
+    }
 }
