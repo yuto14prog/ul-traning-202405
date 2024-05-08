@@ -34,6 +34,7 @@ class TeamController extends Controller
 
         $team = new Team($validated);
         $team->save();
-        return to_route('manager.teams.index');
+
+        return to_route('manager.teams.show', ['team' => $team])->with('success', 'チームを作成しました');
     }
 }
