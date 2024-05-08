@@ -21,7 +21,7 @@ return new class extends Migration
 
             // 外部キーの設定
             $table->foreign('owner_id')->references('id')->on('users');
-            // $table->foreignId('owner_id')->constrained('users');
+            // $table->foreignId('owner_id')->constrained('users'); ←←学習のため
         });
     }
 
