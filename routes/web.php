@@ -45,6 +45,7 @@ Route::middleware(['auth'])  // managerかどうか判定するミドルウェ�
         Route::get('/create', [TeamController::class, 'create'])->name('create');
         
         Route::get('/{team}', [TeamController::class, 'show'])->name('show');
+        Route::get('/{team}/edit', [TeamController::class, 'edit'])->name('edit');
 
         Route::post('/store', [TeamController::class, 'store'])->name('store');
 

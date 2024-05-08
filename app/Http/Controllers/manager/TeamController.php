@@ -36,4 +36,9 @@ class TeamController extends Controller
 
         return to_route('manager.teams.show', ['team' => $team])->with('success', 'チームを作成しました');
     }
+
+    public function edit(Team $team)
+    {
+        return view('manager.teams.edit', compact('team'));
+    }
 }
