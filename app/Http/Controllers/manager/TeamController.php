@@ -53,6 +53,6 @@ class TeamController extends Controller
             'name' => $validated['name']
         ]);
 
-        return to_route('manager.teams.show', ['team' => $team])->with('success', 'チームを更新しました');
+        return to_route('manager.teams.edit', ['team' => $team])->with('success', 'チームを更新しました');
     }
 }
