@@ -39,8 +39,8 @@ Route::middleware(['auth', 'ensureAdmin']) // 適用したいMiddleware名（ ap
 // Team関係
 Route::middleware(['auth']) 
     ->prefix('manager/teams')
-    // ->name('manager.')
+    ->name('manager.teams.')
     ->group(function () {
-        Route::get('/', [TeamController::class, 'index'])->name('teams');
-        Route::get('/{team}', [TeamController::class, 'show'])->name('manager.teams.show');
+        Route::get('/', [TeamController::class, 'index'])->name('index');
+        Route::get('/{team}', [TeamController::class, 'show'])->name('show');
     });
