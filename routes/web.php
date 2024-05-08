@@ -49,4 +49,6 @@ Route::middleware(['auth'])  // managerかどうか判定するミドルウェ�
 
         Route::post('/store', [TeamController::class, 'store'])->name('store');
 
+        Route::patch('/update', [TeamController::class, 'update'])->name('update');
+
     });

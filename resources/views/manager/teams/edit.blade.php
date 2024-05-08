@@ -2,23 +2,22 @@
     <x-slot name="title">Team/edit</x-slot>
     <h2>{{ $team->name }}編集</h2>
     <x-mini-panel>
-        {{-- <x-form-error />
-        <form action="{{ route('admin.users.update', $user) }}" method="post">
+        <x-form-error />
+        <form action="{{ route('manager.teams.update') }}" method="post">
             @csrf
-            @method('patch')
-
-            @include('components.admin.user-fields')
+            @method('PATCH')
 
             <div class="mb-3">
-                <label class="form-label" for="userPassword">パスワード（変更したい場合に入力）</label>
-                <input type="password" name="password" value="" id="userPassword"
-                    class="form-control @error('password') is-invalid @enderror">
-                @error('password')
+                <label class="form-label" for="name">チーム名</label>
+                <input type="hidden" name="id" value="{{$team->id}}" id="id" class="form-control">
+                <input type="text" name="name" value="{{$team->name}}" id="name"
+                    class="form-control @error('name') is-invalid @enderror">
+                @error('name')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
 
             <input type="submit" value="更新" class="btn btn-primary">
-        </form> --}}
+        </form>
     </x-mini-panel>
 </x-layout>

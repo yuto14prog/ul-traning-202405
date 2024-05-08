@@ -41,4 +41,18 @@ class TeamController extends Controller
     {
         return view('manager.teams.edit', compact('team'));
     }
+
+    public function update(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required|max:20',
+        ]);
+
+        $team = Team::find($request->id);
+        $team->update([
+            'name' => $validated['name']
+        ]);
+
+        return to_route('manager.teams.show', ['team' => $team])->with('success', 'チームを更新しました');
+    }
 }
