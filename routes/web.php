@@ -42,5 +42,7 @@ Route::middleware(['auth'])
     ->name('manager.teams.')
     ->group(function () {
         Route::get('/', [TeamController::class, 'index'])->name('index');
+        Route::get('/create', [TeamController::class, 'create'])->name('create');
+
         Route::get('/{team}', [TeamController::class, 'show'])->name('show');
     });

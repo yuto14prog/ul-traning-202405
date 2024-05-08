@@ -19,4 +19,9 @@ class TeamController extends Controller
         $teams = Team::all();
         return view('manager.teams.show', compact('team'));
     }
+
+    public function create()
+    {
+        return view('manager.teams.create');
+    }
 }
