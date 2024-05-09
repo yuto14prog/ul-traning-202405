@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Team;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TeamController extends Controller
 {
@@ -26,10 +27,14 @@ class TeamController extends Controller
 
     public function store(Request $request)
     {
+        // 操作しているユーザー情報を取得
+        $user = Auth::user();
+        
         $validated = $request->validate([
             'name' => 'required|max:20',
-            'owner_id' => 'required'
         ]);
+
+        $validated['owner_id'] = $user->id;
 
         $team = new Team($validated);
         $team->save();
