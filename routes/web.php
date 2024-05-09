@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Manager\TaskController;
 use App\Http\Controllers\Manager\TeamController;
 
 /*
@@ -36,17 +37,18 @@ Route::middleware(['auth', 'ensureAdmin']) // 適用したいMiddleware名（ ap
         Route::resource('/users', UserController::class); // Admin/UserControllerの決められた名前のメソッドに一気に関連づく
     });
 
-// Team関係
-Route::middleware(['auth'])  // managerかどうか判定するミドルウェアまだ
+    Route::middleware(['auth'])  // managerかどうか判定するミドルウェアまだ
     ->prefix('manager/teams')
     ->name('manager.teams.')
     ->group(function () {
+        // Team関係
         Route::get('/', [TeamController::class, 'index'])->name('index');
         Route::get('/create', [TeamController::class, 'create'])->name('create');
         Route::get('/{team}', [TeamController::class, 'show'])->name('show');
         Route::get('/{team}/edit', [TeamController::class, 'edit'])->name('edit');
-
         Route::post('/store', [TeamController::class, 'store'])->name('store');
-
         Route::patch('/{team}', [TeamController::class, 'update'])->name('update');
+
+        // Task関係
+        Route::resource('/{team}/tasks', TaskController::class);
     });
