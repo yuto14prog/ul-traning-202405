@@ -83,4 +83,10 @@ class User extends Authenticatable
     private function setPassword($password) {
         $this->attributes['password'] = bcrypt($password);
     }
+
+    public function ownTeams()
+    {
+        // 'owner_id'と記述しないと、'user_id'カラムを検索してしまう
+        return $this->hasMany(Team::class, 'owner_id');
+    }
 }
