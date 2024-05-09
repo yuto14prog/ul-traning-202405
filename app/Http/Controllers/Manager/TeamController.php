@@ -34,9 +34,8 @@ class TeamController extends Controller
             'name' => 'required|max:20',
         ]);
 
-        $validated['owner_id'] = $user->id;
-
         $team = new Team($validated);
+        $team->owner_id = $user->id;
         $team->save();
 
         return to_route('manager.teams.show', ['team' => $team])->with('success', 'チームを作成しました');
@@ -56,6 +55,7 @@ class TeamController extends Controller
         $team->update([
             'name' => $validated['name']
         ]);
+        // $team->update($validated) ←←学習のため（こうも書ける）
 
         return to_route('manager.teams.edit', ['team' => $team])->with('success', 'チームを更新しました');
     }
