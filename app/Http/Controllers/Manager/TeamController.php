@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Manager;
 use App\Http\Controllers\Controller;
-
+use App\Models\Task;
 use App\Models\Team;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,7 +17,8 @@ class TeamController extends Controller
 
     public function show(Team $team)
     {
-        return view('manager.teams.show', compact('team'));
+        $tasks = Task::all();
+        return view('manager.teams.show', compact('team', 'tasks'));
     }
 
     public function create()
