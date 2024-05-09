@@ -3,8 +3,11 @@
     <h2>{{ $team->name }}(id:{{ $team->id }})</h2>
     <div class="mb-3">
         <div class="text-end mb-2">
+            <a href="{{ route('manager.teams.tasks.create', $team) }}" class="btn btn-primary">タスクの新規作成</a>
+        </div>
+        <div class="text-end mb-2">
             <a href="{{ route('manager.teams.edit', $team) }}" class="btn btn-primary">編集</a>
-        </div>  
+        </div>
     </div>
 
     <table class="table table-striped align-middle">

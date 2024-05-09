@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Manager;
 
 use App\Http\Controllers\Controller;
+use App\Models\Task;
+use App\Models\Team;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
@@ -22,9 +24,9 @@ class TaskController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($team)
     {
-        //
+        return view('manager.tasks.create', ['team' => $team]);
     }
 
     /**
@@ -33,9 +35,18 @@ class TaskController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Team $team)
     {
-        //
+        $validated = $request->validate([
+            'title' => 'required',
+            'body' => 'required',
+        ]);
+
+        $task = new Task($validated);
+        $task->team_id = $team->id;
+        $task->save();
+
+        return to_route('manager.teams.show', ['team' => $team])->with('success', 'タスクを作成しました');
     }
 
     /**

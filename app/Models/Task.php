@@ -9,6 +9,8 @@ class Task extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['title', 'body'];
+
     public function ownerTeam()
     {
         return $this->belongsTo(Team::class);
