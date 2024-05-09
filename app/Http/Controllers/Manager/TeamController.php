@@ -17,7 +17,7 @@ class TeamController extends Controller
 
     public function show(Team $team)
     {
-        $tasks = Task::all();
+        $tasks = Task::all()->where('team_id', $team->id);
         return view('manager.teams.show', compact('team', 'tasks'));
     }
 
