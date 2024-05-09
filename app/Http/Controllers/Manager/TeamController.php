@@ -47,13 +47,12 @@ class TeamController extends Controller
         return view('manager.teams.edit', compact('team'));
     }
 
-    public function update(Request $request)
+    public function update(Request $request, Team $team)
     {
         $validated = $request->validate([
             'name' => 'required|max:20',
         ]);
 
-        $team = Team::find($request->id);
         $team->update([
             'name' => $validated['name']
         ]);

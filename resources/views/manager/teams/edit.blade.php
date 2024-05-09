@@ -3,13 +3,13 @@
     <h2>{{ $team->name }}編集</h2>
     <x-mini-panel>
         <x-form-error />
-        <form action="{{ route('manager.teams.update') }}" method="post">
+        <form action="{{ route('manager.teams.update', $team) }}" method="post">
             @csrf
             @method('PATCH')
 
             <div class="mb-3">
                 <label class="form-label" for="name">チーム名</label>
-                <input type="hidden" name="id" value="{{$team->id}}" id="id" class="form-control">
+                {{-- <input type="hidden" name="id" value="{{$team->id}}" id="id" class="form-control"> --}}
                 <input type="text" name="name" value="{{$team->name}}" id="name"
                     class="form-control @error('name') is-invalid @enderror">
                 @error('name')
