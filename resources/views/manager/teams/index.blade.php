@@ -3,7 +3,7 @@
     <h2>チーム管理</h2>
 
     <div class="text-end mb-2">
-        <a href="{{ route('manager.team.create') }}" class="btn btn-primary">新規作成</a>
+        <a href="{{ route('manager.teams.create') }}" class="btn btn-primary">新規作成</a>
     </div>
 
     <table class="table table-striped align-middle">
@@ -17,7 +17,7 @@
             @foreach ($teams as $team)
                 <tr>
                     <th scope="row">{{ $team->id }}</th>
-                    <td><a href="{{ route('manager.team.show', $team) }}">{{ $team->name }}</a></td>
+                    <td><a href="{{ route('manager.teams.show', $team) }}">{{ $team->name }}</a></td>
                 </tr>
             @endforeach
         </tbody>

@@ -42,13 +42,13 @@ Route::middleware(['auth', 'ensureAdmin']) // 適用したいMiddleware名（ ap
     ->name('manager.')
     ->group(function () {
         // Team関係
-        Route::get('/team', [TeamController::class, 'index'])->name('team.index');
-        Route::get('/team/create', [TeamController::class, 'create'])->name('team.create');
-        Route::get('/team/{team}', [TeamController::class, 'show'])->name('team.show');
-        Route::get('/team/{team}/edit', [TeamController::class, 'edit'])->name('team.edit');
-        Route::post('/team/store', [TeamController::class, 'store'])->name('team.store');
-        Route::patch('/team/{team}', [TeamController::class, 'update'])->name('team.update');
+        Route::get('/teams', [TeamController::class, 'index'])->name('teams.index');
+        Route::get('/teams/create', [TeamController::class, 'create'])->name('teams.create');
+        Route::get('/teams/{team}', [TeamController::class, 'show'])->name('teams.show');
+        Route::get('/teams/{team}/edit', [TeamController::class, 'edit'])->name('teams.edit');
+        Route::post('/teams/store', [TeamController::class, 'store'])->name('teams.store');
+        Route::patch('/team/{team}', [TeamController::class, 'update'])->name('teams.update');
 
         // Task関係
-        Route::resource('/team.tasks', TaskController::class);
+        Route::resource('/teams.tasks', TaskController::class);
     });

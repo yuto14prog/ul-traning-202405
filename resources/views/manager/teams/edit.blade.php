@@ -3,7 +3,7 @@
     <h2>{{ $team->name }}編集</h2>
     <x-mini-panel>
         <x-form-error />
-        <form action="{{ route('manager.team.update', $team) }}" method="post">
+        <form action="{{ route('manager.teams.update', $team) }}" method="post">
             @csrf
             @method('PATCH')
 

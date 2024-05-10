@@ -16,7 +16,7 @@ class TaskController extends Controller
      */
     public function index()
     {
-        return to_route('manager.team.show');
+        return to_route('manager.teams.show');
     }
 
     /**
@@ -46,7 +46,7 @@ class TaskController extends Controller
         $task->team_id = $team->id;
         $task->save();
 
-        return to_route('manager.team.show', ['team' => $team])->with('success', 'タスクを作成しました');
+        return to_route('manager.teams.show', ['team' => $team])->with('success', 'タスクを作成しました');
     }
 
     /**

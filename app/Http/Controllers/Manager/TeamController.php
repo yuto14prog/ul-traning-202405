@@ -39,7 +39,7 @@ class TeamController extends Controller
         $team->owner_id = $user->id;
         $team->save();
 
-        return to_route('manager.team.show', ['team' => $team])->with('success', 'チームを作成しました');
+        return to_route('manager.teams.show', ['team' => $team])->with('success', 'チームを作成しました');
     }
 
     public function edit(Team $team)
@@ -58,6 +58,6 @@ class TeamController extends Controller
         ]);
         // $team->update($validated) ←←学習のため（こうも書ける）
 
-        return to_route('manager.team.edit', ['team' => $team])->with('success', 'チームを更新しました');
+        return to_route('manager.teams.edit', ['team' => $team])->with('success', 'チームを更新しました');
     }
 }
