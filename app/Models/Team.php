@@ -20,4 +20,9 @@ class Team extends Model
     {
         return $this->hasMany(Task::class);
     }
+
+    public function ownMembers()
+    {
+        return $this->hasMany(Member::class);
+    }
 }
