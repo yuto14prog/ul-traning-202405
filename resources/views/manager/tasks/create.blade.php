@@ -1,6 +1,6 @@
 <x-layout>
     <x-slot name="title">Task作成</x-slot>
-    <h2>タスク新規作成</h2>
+    <h2><a href="{{ route('manager.teams.show', $team) }}">{{$team->name}}</a>/タスク新規作成</h2>
     <x-form-error />
     <x-mini-panel>
         <form action="{{ route('manager.teams.tasks.store', $team) }}" method="post">
