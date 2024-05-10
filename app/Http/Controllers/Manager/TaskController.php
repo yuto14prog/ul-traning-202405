@@ -78,9 +78,16 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Team $team, Task $task)
     {
-        //
+        $validated = $request->validate([
+            'title' => 'required',
+            'body' => 'required',
+        ]);
+
+        $task->update($validated);
+
+        return to_route('manager.teams.show', ['team' => $team])->with('success', 'タスクを更新しました');
     }
 
     /**
