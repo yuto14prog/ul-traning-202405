@@ -26,7 +26,7 @@
                     <th scope="row">{{ $task->title }}</th>
                     <th scope="row">{{ $task->created_at }}</th>
                     <td><div class="text-end mb-2">
-                        <a href="{{ route('manager.teams.tasks.edit',$team, $task) }}" class="btn btn-primary">編集</a>
+                        <a href="{{ route('manager.teams.tasks.edit',[$team, $task]) }}" class="btn btn-primary">編集</a>
                     </div></td>
                 </tr>
             @endforeach
