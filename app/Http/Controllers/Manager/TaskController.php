@@ -24,7 +24,7 @@ class TaskController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($team)
+    public function create(Team $team)
     {
         return view('manager.tasks.create', ['team' => $team]);
     }
