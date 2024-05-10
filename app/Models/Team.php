@@ -15,4 +15,9 @@ class Team extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function ownTasks()
+    {
+        return $this->hasMany(Task::class);
+    }
 }
