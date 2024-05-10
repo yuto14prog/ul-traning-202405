@@ -38,17 +38,17 @@ Route::middleware(['auth', 'ensureAdmin']) // 適用したいMiddleware名（ ap
     });
 
     Route::middleware(['auth'])  // managerかどうか判定するミドルウェアまだ
-    ->prefix('manager/teams')
-    ->name('manager.teams.')
+    ->prefix('manager')
+    ->name('manager.')
     ->group(function () {
         // Team関係
-        Route::get('/', [TeamController::class, 'index'])->name('index');
-        Route::get('/create', [TeamController::class, 'create'])->name('create');
-        Route::get('/{team}', [TeamController::class, 'show'])->name('show');
-        Route::get('/{team}/edit', [TeamController::class, 'edit'])->name('edit');
-        Route::post('/store', [TeamController::class, 'store'])->name('store');
-        Route::patch('/{team}', [TeamController::class, 'update'])->name('update');
+        Route::get('/team', [TeamController::class, 'index'])->name('team.index');
+        Route::get('/team/create', [TeamController::class, 'create'])->name('team.create');
+        Route::get('/team/{team}', [TeamController::class, 'show'])->name('team.show');
+        Route::get('/team/{team}/edit', [TeamController::class, 'edit'])->name('team.edit');
+        Route::post('/team/store', [TeamController::class, 'store'])->name('team.store');
+        Route::patch('/team/{team}', [TeamController::class, 'update'])->name('team.update');
 
         // Task関係
-        Route::resource('/{team}/tasks', TaskController::class);
+        Route::resource('/team.tasks', TaskController::class);
     });

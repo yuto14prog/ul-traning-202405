@@ -3,7 +3,7 @@
     <h2>タスク新規作成</h2>
     <x-form-error />
     <x-mini-panel>
-        <form action="{{ route('manager.teams.tasks.store', $team) }}" method="post">
+        <form action="{{ route('manager.team.tasks.store', $team) }}" method="post">
             @csrf
 
             <div class="mb-3">
