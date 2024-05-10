@@ -1,6 +1,6 @@
 <x-layout>
     <x-slot name="title">Task/edit</x-slot>
-    <h2>{{ $task->title }}編集</h2>
+    <h2><a href="{{ route('manager.teams.show', $team) }}">{{$team->name}}</a>/{{ $task->title }}編集</h2>
     <x-mini-panel>
         <x-form-error />
         <form action="{{ route('manager.teams.tasks.update', [$team, $task]) }}" method="post">
