@@ -23,6 +23,9 @@ class MemberController extends Controller
             ->select('members.*', 'users.name')
             ->get();
 
+        // with()を使うとテーブルを追加して取得できる（←学習のため）
+        // $members = Member::with('user')->get();
+
         return view('manager.members.index', ['team' => $team, 'members' => $members]);
     }
 
