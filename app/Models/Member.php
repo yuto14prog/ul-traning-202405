@@ -9,7 +9,7 @@ class Member extends Model
 {
     use HasFactory;
 
-    public function myTeam()
+    public function team()
     {
         return $this->belongsTo(Team::class);
     }
