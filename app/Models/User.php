@@ -89,4 +89,9 @@ class User extends Authenticatable
         // 'owner_id'と記述しないと、'user_id'カラムを検索してしまう
         return $this->hasMany(Team::class, 'owner_id');
     }
+
+    public function members()
+    {
+        return $this->hasMany(Member::class);
+    }
 }
