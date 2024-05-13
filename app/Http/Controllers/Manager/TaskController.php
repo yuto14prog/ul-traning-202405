@@ -71,7 +71,9 @@ class TaskController extends Controller
      */
     public function edit(Team $team, Task $task)
     {
-        return view('manager.tasks.edit', compact('team', 'task'));
+        $users = $team->users;
+
+        return view('manager.tasks.edit', compact('team', 'task', 'users'));
     }
 
     /**
@@ -88,6 +90,8 @@ class TaskController extends Controller
             'body' => 'required',
         ]);
 
+        $task->fill($validated);
+        $task->assignee_id = $request->assignee_id;
         $task->update($validated);
 
         return to_route('manager.teams.show', ['team' => $team])->with('success', 'タスクを更新しました');
