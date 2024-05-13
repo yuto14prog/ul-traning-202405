@@ -92,7 +92,7 @@ class TaskController extends Controller
 
         $task->fill($validated);
         $task->assignee_id = $request->assignee_id;
-        $task->update($validated);
+        $task->save();
 
         return to_route('manager.teams.show', ['team' => $team])->with('success', 'タスクを更新しました');
     }
