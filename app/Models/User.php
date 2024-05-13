@@ -89,4 +89,16 @@ class User extends Authenticatable
         // 'owner_id'と記述しないと、'user_id'カラムを検索してしまう
         return $this->hasMany(Team::class, 'owner_id');
     }
+
+    public function members()
+    {
+        return $this->hasMany(Member::class);
+    }
+
+    // 所属しているチーム→teams（←学習のため）
+    public function inTeams()
+    {
+        // 中間テーブル名を明記（デフォルトは'team_user'で探しちゃう）←学習のため
+        return $this->belongsToMany(Team::class, 'members');
+    }
 }
