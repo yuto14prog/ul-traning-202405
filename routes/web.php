@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Manager\MemberController;
 use App\Http\Controllers\Manager\TaskController;
 use App\Http\Controllers\Manager\TeamController;
 
@@ -51,4 +52,7 @@ Route::middleware(['auth', 'ensureAdmin']) // 適用したいMiddleware名（ ap
 
         // Task関係
         Route::resource('/teams.tasks', TaskController::class);
+
+        // Member関係
+        Route::resource('/teams.members', MemberController::class);
     });
