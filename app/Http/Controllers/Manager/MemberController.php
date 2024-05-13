@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Manager;
 use App\Http\Controllers\Controller;
 use App\Models\Team;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class MemberController extends Controller
 {
@@ -15,7 +16,14 @@ class MemberController extends Controller
      */
     public function index(Team $team)
     {
-        return view('manager.members.index', ['team' => $team]);
+        // MembersテーブルにUsersテーブルをInnerJoin（←学習のため）
+        $members = DB::table('members')
+            ->join('users', 'users.id', '=', 'members.user_id')
+            ->where('team_id', $team->id )
+            ->select('members.*', 'users.name')
+            ->get();
+
+        return view('manager.members.index', ['team' => $team, 'members' => $members]);
     }
 
     /**
