@@ -3,6 +3,7 @@
     <h2>チーム新規作成</h2>
     <x-form-error />
     <x-mini-panel>
+        <x-form-error />
         <form action="{{ route('manager.teams.store') }}" method="post">
             @csrf
 

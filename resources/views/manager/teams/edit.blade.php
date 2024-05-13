@@ -1,8 +1,8 @@
 <x-layout>
     <x-slot name="title">Team/edit</x-slot>
     <h2>{{ $team->name }}編集</h2>
+    <x-form-error />
     <x-mini-panel>
-        <x-form-error />
         <form action="{{ route('manager.teams.update', $team) }}" method="post">
             @csrf
             @method('PATCH')
