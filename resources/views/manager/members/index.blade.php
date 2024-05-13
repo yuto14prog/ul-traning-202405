@@ -1,6 +1,9 @@
 <x-layout>
     <x-slot name="title">Members</x-slot>
-    <h2><a href="{{ route('manager.teams.show', $team) }}">{{ $team->name }}</a>/メンバー管理</h2>
+    <h2>
+        <a href="{{ route('manager.teams.show', $team) }}">{{ $team->name }}(id:{{ $team->id }})</a>
+        /メンバー管理
+    </h2>
 
     <div class="text-end mb-2">
         <form action="" method="post">
