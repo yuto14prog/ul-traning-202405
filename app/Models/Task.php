@@ -11,7 +11,7 @@ class Task extends Model
 
     protected $fillable = ['title', 'body'];
 
-    public function ownerTeam()
+    public function team()
     {
         return $this->belongsTo(Team::class);
     }
