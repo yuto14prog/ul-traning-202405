@@ -22,6 +22,15 @@
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
+            <div class="mb-3">
+                <label class="form-label" for="assignee_id">担当者</label>
+                <select name="assignee_id" id="assignee_id">
+                    <option value="">なし</option>
+                    @foreach ($users as $user)
+                        <option value="{{ $user->id }}">{{ $user->name }}</option>
+                    @endforeach
+                </select>
+            </div>
 
             <input type="submit" value="作成" class="btn btn-primary">
         </form>

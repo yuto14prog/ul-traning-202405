@@ -26,7 +26,9 @@ class TaskController extends Controller
      */
     public function create(Team $team)
     {
-        return view('manager.tasks.create', ['team' => $team]);
+        $users = $team->users;
+
+        return view('manager.tasks.create', ['team' => $team, 'users' => $users]);
     }
 
     /**
@@ -44,6 +46,7 @@ class TaskController extends Controller
 
         $task = new Task($validated);
         $task->team_id = $team->id;
+        $task->assignee_id = $request->assignee_id;
         $task->save();
 
         return to_route('manager.teams.show', ['team' => $team])->with('success', 'タスクを作成しました');

@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('tasks', function (Blueprint $table) {
-            $table->bigInteger('assignee_id')->unsigned();
+            $table->bigInteger('assignee_id')->unsigned()->nullable();
 
             $table->foreign('assignee_id')->references('id')->on('users');
         });
