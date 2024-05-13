@@ -28,7 +28,9 @@ return new class extends Migration
     public function down()
     {
         Schema::table('tasks', function (Blueprint $table) {
-            //
+            // カラムを削除するときは外部キー制約を解除してから（←学習のため）
+            $table->dropForeign('tasks_assignee_id_foreign');
+            $table->dropColumn('assignee_id');
         });
     }
 };
