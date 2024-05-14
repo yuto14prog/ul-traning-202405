@@ -43,7 +43,6 @@ Route::middleware(['auth'])  // managerかどうか判定するミドルウェ�
     ->name('manager.')
     ->group(function () {
         // Team関係
-        Route::get('/teams', [TeamController::class, 'index'])->name('teams.index');
         Route::get('/teams/create', [TeamController::class, 'create'])->name('teams.create');
         Route::get('/teams/{team}', [TeamController::class, 'show'])->name('teams.show');
         Route::get('/teams/{team}/edit', [TeamController::class, 'edit'])->name('teams.edit');
@@ -55,4 +54,9 @@ Route::middleware(['auth'])  // managerかどうか判定するミドルウェ�
 
         // Member関係
         Route::resource('/teams.members', MemberController::class);
+    });
+
+Route::prefix('teams')
+    ->group(function () {
+        Route::get('/', [TeamController::class, 'index'])->name('teams.index');
     });
