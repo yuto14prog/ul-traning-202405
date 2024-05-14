@@ -4,7 +4,7 @@
     <x-form-error />
     <x-mini-panel>
         <x-form-error />
-        <form action="{{ route('teams.store') }}" method="post">
+        <form action="{{ route('teams.index') }}" method="post">
             @csrf
 
             <div class="mb-3">

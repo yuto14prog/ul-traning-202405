@@ -46,7 +46,6 @@ Route::middleware(['auth'])  // managerかどうか判定するミドルウェ�
         // Team関係
         Route::get('/teams/{team}', [TeamController::class, 'show'])->name('teams.show');
         Route::get('/teams/{team}/edit', [TeamController::class, 'edit'])->name('teams.edit');
-        Route::post('/teams/store', [TeamController::class, 'store'])->name('teams.store');
         Route::patch('/team/{team}', [TeamController::class, 'update'])->name('teams.update');
 
         // Task関係
@@ -61,5 +60,5 @@ Route::middleware(['auth'])
     ->group(function () {
         Route::get('/', [ControllersTeamController::class, 'index'])->name('teams.index');
         Route::get('/create', [ControllersTeamController::class, 'create'])->name('teams.create');
-        Route::post('/store', [ControllersTeamController::class, 'store'])->name('teams.store');
+        Route::post('/', [ControllersTeamController::class, 'store'])->name('teams.store');
     });
