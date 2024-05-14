@@ -18,6 +18,7 @@ class MemberSeeder extends Seeder
         DB::table('members')->insert([
             'team_id' => 1,
             'user_id' => 2,
+            'role' => 1,
         ]);
         DB::table('members')->insert([
             'team_id' => 2,
