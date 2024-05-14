@@ -35,7 +35,7 @@
                             マネージャー
                         @endif
                     </th>
-                    <td>{{ $member->name }}</td>
+                    <td>{{ $member->user->name }}</td>
                 </tr>
             @endforeach
         </tbody>
