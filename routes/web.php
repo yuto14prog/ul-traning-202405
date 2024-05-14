@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Manager\MemberController;
 use App\Http\Controllers\Manager\TaskController;
 use App\Http\Controllers\Manager\TeamController;
+use App\Http\Controllers\TeamController as ControllersTeamController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,6 +58,7 @@ Route::middleware(['auth'])  // managerかどうか判定するミドルウェ�
 
 Route::prefix('teams')
     ->group(function () {
-        Route::get('/', [TeamController::class, 'index'])->name('teams.index');
-        Route::get('/create', [TeamController::class, 'create'])->name('teams.create');
+        Route::get('/', [ControllersTeamController::class, 'index'])->name('teams.index');
+        Route::get('/create', [ControllersTeamController::class, 'create'])->name('teams.create');
+        Route::post('/store', [ControllersTeamController::class, 'store'])->name('teams.store');
     });
