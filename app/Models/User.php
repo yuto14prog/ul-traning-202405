@@ -51,6 +51,18 @@ class User extends Authenticatable
         return $this->role == UserRole::Admin;
     }
 
+    public function isManager($team)
+    {
+        // マネージャーをしているチームと参照するチームが一致しているか（←学習のため）
+        // Membersにレコードが存在するかチェック
+        $isTeam = $this->members()
+            ->where('role', 1)
+            ->where('team_id', $team->id)
+            ->exists();
+
+        return $isTeam;
+    }
+
     // 管理者から新規ユーザーを作成する特殊なメソッド。
     // 作成されたユーザーはemailの認証が済んだ状態になる。
     public static function createAsVerified($attributes) {

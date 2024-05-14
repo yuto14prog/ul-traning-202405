@@ -16,6 +16,13 @@ class EnsureManager
      */
     public function handle(Request $request, Closure $next)
     {
+        // パラメータの`{team}`を取得（←学習のため）
+        $team = $request->route()->parameter('team');
+
+        if (!$request->user()->isManager($team)) {
+            return redirect('/')->with('danger', 'アクセスできません');
+        }
+
         return $next($request);
     }
 }
