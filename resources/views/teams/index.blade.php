@@ -3,7 +3,7 @@
     <h2>チーム管理</h2>
 
     <div class="text-end mb-2">
-        <a href="{{ route('manager.teams.create') }}" class="btn btn-primary">新規作成</a>
+        <a href="{{ route('teams.create') }}" class="btn btn-primary">新規作成</a>
     </div>
 
     <table class="table table-striped align-middle">

@@ -11,8 +11,7 @@ class TeamController extends Controller
 {
     public function index()
     {
-        $teams = Team::all();
-        return view('manager.teams.index', compact('teams'));
+        //
     }
 
     public function show(Team $team)
@@ -23,23 +22,12 @@ class TeamController extends Controller
 
     public function create()
     {
-        return view('manager.teams.create');
+        //
     }
 
     public function store(Request $request)
     {
-        // 操作しているユーザー情報を取得
-        $user = Auth::user();
-        
-        $validated = $request->validate([
-            'name' => 'required|max:20',
-        ]);
-
-        $team = new Team($validated);
-        $team->owner_id = $user->id;
-        $team->save();
-
-        return to_route('manager.teams.show', ['team' => $team])->with('success', 'チームを作成しました');
+        //
     }
 
     public function edit(Team $team)

@@ -3,8 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Manager\MemberController;
 use App\Http\Controllers\Manager\TaskController;
 use App\Http\Controllers\Manager\TeamController;
+use App\Http\Controllers\TeamController as ControllersTeamController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,13 +44,21 @@ Route::middleware(['auth'])  // managerかどうか判定するミドルウェ�
     ->name('manager.')
     ->group(function () {
         // Team関係
-        Route::get('/teams', [TeamController::class, 'index'])->name('teams.index');
-        Route::get('/teams/create', [TeamController::class, 'create'])->name('teams.create');
         Route::get('/teams/{team}', [TeamController::class, 'show'])->name('teams.show');
         Route::get('/teams/{team}/edit', [TeamController::class, 'edit'])->name('teams.edit');
-        Route::post('/teams/store', [TeamController::class, 'store'])->name('teams.store');
         Route::patch('/team/{team}', [TeamController::class, 'update'])->name('teams.update');
 
         // Task関係
         Route::resource('/teams.tasks', TaskController::class);
+
+        // Member関係
+        Route::resource('/teams.members', MemberController::class);
+    });
+
+Route::middleware(['auth'])
+    ->prefix('teams')
+    ->group(function () {
+        Route::get('/', [ControllersTeamController::class, 'index'])->name('teams.index');
+        Route::get('/create', [ControllersTeamController::class, 'create'])->name('teams.create');
+        Route::post('/', [ControllersTeamController::class, 'store'])->name('teams.store');
     });
