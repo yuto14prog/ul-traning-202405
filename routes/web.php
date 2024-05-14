@@ -56,7 +56,8 @@ Route::middleware(['auth'])  // managerかどうか判定するミドルウェ�
         Route::resource('/teams.members', MemberController::class);
     });
 
-Route::prefix('teams')
+Route::middleware(['auth'])
+    ->prefix('teams')
     ->group(function () {
         Route::get('/', [ControllersTeamController::class, 'index'])->name('teams.index');
         Route::get('/create', [ControllersTeamController::class, 'create'])->name('teams.create');
