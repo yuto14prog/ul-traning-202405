@@ -96,7 +96,7 @@ class User extends Authenticatable
     }
 
     // 所属しているチーム→teams（←学習のため）
-    public function inTeams()
+    public function teams()
     {
         // 中間テーブル名を明記（デフォルトは'team_user'で探しちゃう）←学習のため
         return $this->belongsToMany(Team::class, 'members');

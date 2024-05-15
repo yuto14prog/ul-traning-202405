@@ -55,10 +55,7 @@ Route::middleware(['auth', 'ensureManager'])
         Route::resource('/teams.members', MemberController::class);
     });
 
-Route::middleware(['auth'])
-    ->prefix('teams')
-    ->group(function () {
-        Route::get('/', [ControllersTeamController::class, 'index'])->name('teams.index');
-        Route::get('/create', [ControllersTeamController::class, 'create'])->name('teams.create');
-        Route::post('/', [ControllersTeamController::class, 'store'])->name('teams.store');
-    });
+Route::middleware(['auth'])->group(function () {
+    // Controllerはフルパスの指定ができる
+    Route::resource('/teams', App\Http\Controllers\TeamController::class, ['only' => ['index', 'create', 'store']]);
+});

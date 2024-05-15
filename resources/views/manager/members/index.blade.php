@@ -6,9 +6,9 @@
     </h2>
 
     <div class="text-end mb-2">
-        <form action="" method="post">
+        <form action="{{ route('manager.teams.members.store', $team) }}" method="post">
             @csrf
-            <label for=" {{ route('manager.teams.members.store', $team) }} ">新規メンバー追加</label>
+            <label for="user_id">新規メンバー追加</label>
             <select name="user_id" id="user_id">
                 @foreach ($users as $user)
                 <option value="{{ $user->id }}">{{ $user->name }}</option>
@@ -35,7 +35,7 @@
                             マネージャー
                         @endif
                     </th>
-                    <td>{{ $member->name }}</td>
+                    <td>{{ $member->user->name }}</td>
                 </tr>
             @endforeach
         </tbody>
