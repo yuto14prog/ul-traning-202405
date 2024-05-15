@@ -33,7 +33,7 @@ class Team extends Model
         return $this->belongsToMany(User::class, 'members');
     }
 
-    public function isManager($user)
+    public function isManager(User $user)
     {
         // 受け取ったUserがマネージャーをしているチームかどうか判定（←学習のため）
         // Membersにレコードが存在するかチェック
