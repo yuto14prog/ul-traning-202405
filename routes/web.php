@@ -6,7 +6,6 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Manager\MemberController;
 use App\Http\Controllers\Manager\TaskController;
 use App\Http\Controllers\Manager\TeamController;
-use App\Http\Controllers\TeamController as ControllersTeamController;
 
 /*
 |--------------------------------------------------------------------------
