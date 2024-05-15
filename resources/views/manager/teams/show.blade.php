@@ -6,6 +6,9 @@
             <a href="{{ route('manager.teams.tasks.create', $team) }}" class="btn btn-primary">タスクの新規作成</a>
         </div>
         <div class="text-end mb-2">
+            <a href="{{ route('manager.teams.members.index', $team) }}" class="btn btn-primary">メンバー管理</a>
+        </div>
+        <div class="text-end mb-2">
             <a href="{{ route('manager.teams.edit', $team) }}" class="btn btn-primary">編集</a>
         </div>
     </div>
@@ -15,6 +18,7 @@
             <tr>
                 <th scope="col">タスクID</th>
                 <th scope="col">タイトル</th>
+                <th scope="col">担当者</th>
                 <th scope="col">作成日時</th>
                 <th scope="col">操作</th>
             </tr>
@@ -24,6 +28,14 @@
                 <tr>
                     <th scope="row">{{ $task->id }}</th>
                     <th scope="row">{{ $task->title }}</th>
+                    {{-- <th scope="row">{{ $task->assignee_id }}</th> --}}
+                    <th scope="row">
+                        @if ($task->assignee_id)
+                            {{ $task->assignee->name }}
+                        @else
+                            なし
+                        @endif
+                    </th>
                     <th scope="row">{{ $task->created_at }}</th>
                     <td><div class="text-end mb-2">
                         <a href="{{ route('manager.teams.tasks.edit', [$team, $task]) }}" class="btn btn-primary">編集</a>

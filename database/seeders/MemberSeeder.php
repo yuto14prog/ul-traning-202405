@@ -6,7 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class TaskSeeder extends Seeder
+class MemberSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,11 +15,14 @@ class TaskSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('tasks')->insert([
-            'team_id' => '1',
-            'title' => 'test_title',
-            'body' => 'test_body',
-            'assignee_id' => 1,
+        DB::table('members')->insert([
+            'team_id' => 1,
+            'user_id' => 2,
+            'role' => 1,
+        ]);
+        DB::table('members')->insert([
+            'team_id' => 2,
+            'user_id' => 3,
         ]);
     }
 }
