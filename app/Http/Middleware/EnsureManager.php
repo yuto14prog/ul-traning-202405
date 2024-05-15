@@ -17,6 +17,7 @@ class EnsureManager
      */
     public function handle(Request $request, Closure $next)
     {
+        // パラメータの`{team}`を取得（←学習のため）
         $team = $request->route()->parameter('team');
         $user = Auth::user();
 
