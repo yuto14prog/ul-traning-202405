@@ -37,11 +37,9 @@ class Team extends Model
     {
         // 受け取ったUserがマネージャーをしているチームかどうか判定（←学習のため）
         // Membersにレコードが存在するかチェック
-        $isTeam = $user->members()
+        return $user->members()
             ->where('role', 1)
             ->where('team_id', $this->id)
             ->exists();
-
-        return $isTeam;
     }
 }
