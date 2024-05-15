@@ -35,11 +35,7 @@
                             マネージャー
                         @endif
                     </th>
-<<<<<<< HEAD
-                    <td>{{ $member->name }}</td>
-=======
                     <td>{{ $member->user->name }}</td>
->>>>>>> main
                 </tr>
             @endforeach
         </tbody>
