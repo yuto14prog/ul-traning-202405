@@ -38,7 +38,7 @@ Route::middleware(['auth', 'ensureAdmin']) // 適用したいMiddleware名（ ap
         Route::resource('/users', UserController::class); // Admin/UserControllerの決められた名前のメソッドに一気に関連づく
     });
 
-Route::middleware(['auth'])  // managerかどうか判定するミドルウェアまだ
+Route::middleware(['auth', 'ensureManager'])
     ->prefix('manager')
     ->name('manager.')
     ->group(function () {
