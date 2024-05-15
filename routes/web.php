@@ -43,11 +43,8 @@ Route::middleware(['auth'])  // managerかどうか判定するミドルウェ�
     ->name('manager.')
     ->group(function () {
         // Team関係
-        Route::get('/teams', [TeamController::class, 'index'])->name('teams.index');
-        Route::get('/teams/create', [TeamController::class, 'create'])->name('teams.create');
         Route::get('/teams/{team}', [TeamController::class, 'show'])->name('teams.show');
         Route::get('/teams/{team}/edit', [TeamController::class, 'edit'])->name('teams.edit');
-        Route::post('/teams/store', [TeamController::class, 'store'])->name('teams.store');
         Route::patch('/team/{team}', [TeamController::class, 'update'])->name('teams.update');
 
         // Task関係
@@ -56,3 +53,8 @@ Route::middleware(['auth'])  // managerかどうか判定するミドルウェ�
         // Member関係
         Route::resource('/teams.members', MemberController::class);
     });
+
+Route::middleware(['auth'])->group(function () {
+    // Controllerはフルパスの指定ができる
+    Route::resource('/teams', App\Http\Controllers\TeamController::class, ['only' => ['index', 'create', 'store']]);
+});
