@@ -32,4 +32,16 @@ class Team extends Model
         // 中間テーブル名を明記（デフォルトは'team_user'で探しちゃう）←学習のため
         return $this->belongsToMany(User::class, 'members');
     }
+
+    public function isManager($user)
+    {
+        // 受け取ったUserがマネージャーをしているチームかどうか判定（←学習のため）
+        // Membersにレコードが存在するかチェック
+        $isTeam = $user->members()
+            ->where('role', 1)
+            ->where('team_id', $this->id)
+            ->exists();
+
+        return $isTeam;
+    }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EnsureManager
 {
@@ -16,10 +17,10 @@ class EnsureManager
      */
     public function handle(Request $request, Closure $next)
     {
-        // パラメータの`{team}`を取得（←学習のため）
         $team = $request->route()->parameter('team');
+        $user = Auth::user();
 
-        if (!$request->user()->isManager($team)) {
+        if (!$team->isManager($user)) {
             return redirect('/')->with('danger', 'アクセスできません');
         }
 
