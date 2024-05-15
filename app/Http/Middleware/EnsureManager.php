@@ -19,9 +19,8 @@ class EnsureManager
     {
         // パラメータの`{team}`を取得（←学習のため）
         $team = $request->route('team');
-        $user = Auth::user();
 
-        if (!$team->isManager($user)) {
+        if (!$team->isManager($request->user())) {
             return redirect('/')->with('danger', 'アクセスできません');
         }
 
