@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Team extends Model
 {
@@ -41,5 +42,24 @@ class Team extends Model
             ->where('role', 1)
             ->where('team_id', $this->id)
             ->exists();
+    }
+
+    public static function createWithOwner(User $user, $validated)
+    {
+        // DB操作を２つするのでトランザクション（←学習のため）
+        return DB::transaction(function () use ($user, $validated) 
+        {
+            $team = new Team($validated);
+            $team->owner_id = $user->id;
+            $team->save();
+
+            $member = new Member();
+            $member->team_id = $team->id;
+            $member->user_id = $user->id;
+            $member->role = 1;
+            $member->save();
+
+            return $team;
+        });
     }
 }

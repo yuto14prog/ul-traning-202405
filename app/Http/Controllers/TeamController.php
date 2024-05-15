@@ -38,29 +38,12 @@ class TeamController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        // 操作しているユーザー情報を取得
-        $user = Auth::user();
-        
+    {   
         $validated = $request->validate([
             'name' => 'required|max:20',
         ]);
 
-        // DB操作を２つするのでトランザクション（←学習のため）
-        $team = DB::transaction(function () use ($validated, $user) 
-        {
-            $team = new Team($validated);
-            $team->owner_id = $user->id;
-            $team->save();
-
-            $member = new Member();
-            $member->team_id = $team->id;
-            $member->user_id = $user->id;
-            $member->role = 1;
-            $member->save();
-
-            return $team;
-        });
+        $team = Team::createWithOwner(Auth::user(), $validated);
 
         return to_route('manager.teams.show', ['team' => $team])->with('success', 'チームを作成しました');
     }
