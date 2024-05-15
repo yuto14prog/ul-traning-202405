@@ -19,6 +19,7 @@ class TaskSeeder extends Seeder
             'team_id' => '1',
             'title' => 'test_title',
             'body' => 'test_body',
+            'assignee_id' => 1,
         ]);
     }
 }

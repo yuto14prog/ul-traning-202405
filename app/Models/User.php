@@ -101,4 +101,9 @@ class User extends Authenticatable
         // 中間テーブル名を明記（デフォルトは'team_user'で探しちゃう）←学習のため
         return $this->belongsToMany(Team::class, 'members');
     }
+
+    public function tasks()
+    {
+        return $this->hasMany(Task::class, 'assignee_id');
+    }
 }
