@@ -21,14 +21,17 @@ class MemberController extends Controller
         $users = User::all();
 
         // MembersテーブルにUsersテーブルをInnerJoin（←学習のため）
-        $members = DB::table('members')
-            ->join('users', 'users.id', '=', 'members.user_id')
-            ->where('team_id', $team->id )
-            ->select('members.*', 'users.name')
-            ->get();
+        // $members = DB::table('members')
+        //     ->join('users', 'users.id', '=', 'members.user_id')
+        //     ->where('team_id', $team->id )
+        //     ->select('members.*', 'users.name')
+        //     ->get();
 
         // with()を使うとテーブルを追加して取得できる（←学習のため）
         // $members = Member::with('user')->get();
+
+        // このままだと中間テーブルだけなので、Viewで`$member->user->name`（←学習のため）
+        $members = $team->members;
 
         return view('manager.members.index', [
             'team' => $team,
