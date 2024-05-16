@@ -2,7 +2,9 @@
 
 namespace Tests\Unit;
 
-use PHPUnit\Framework\TestCase;
+use App\Models\Team;
+use App\Models\User;
+use Tests\TestCase;
 
 class TeamTest extends TestCase
 {
@@ -11,8 +13,20 @@ class TeamTest extends TestCase
      *
      * @return void
      */
-    public function test_example()
+    public function test_createWithOwner()
     {
-        $this->assertTrue(true);
+        $data = ['name' => 'teamname'];
+        $user = User::factory()->create();
+
+        $resultTeam = Team::createWithOwner($user, $data);
+        $resultMember = $resultTeam->members()->where('user_id', $user->id)->first();
+
+        // Teams
+        $this->assertDatabaseHas('teams', ['name' => $data['name']]);
+        $this->assertEquals($resultTeam->owner_id, $user->id);
+
+        // Members
+        $this->assertDatabaseHas('members', ['user_id' => $user->id]);
+        $this->assertEquals($resultMember->role, 1);
     }
 }
