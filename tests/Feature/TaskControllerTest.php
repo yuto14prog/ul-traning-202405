@@ -5,6 +5,7 @@ namespace Tests\Unit;
 use App\Models\Task;
 use App\Models\User;
 use Illuminate\Testing\Fluent\AssertableJson;
+use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
 
 class TaskControllerTest extends TestCase
@@ -17,6 +18,7 @@ class TaskControllerTest extends TestCase
     public function test_api_show()
     {
         $user = User::factory()->make();
+        Sanctum::actingAs($user);
         
         $task = new Task([
             'title' => 'test_title',
@@ -27,7 +29,9 @@ class TaskControllerTest extends TestCase
         $task->team_id = 1;
         $task->save();
         
-        $response = $this->actingAs($user)->getJson(route('api.task', ['task' => $task]));
+        $response = $this->getJson(route('api.task', ['task' => $task]));
+        // `Sanctum::actingAs($user);`をしない場合は以下（←学習のため）
+        // $response = $this->actingAs($user)->getJson(route('api.task', ['task' => $task]));
 
         $response->assertOk();
         $response->assertJson(fn (AssertableJson $json) =>
