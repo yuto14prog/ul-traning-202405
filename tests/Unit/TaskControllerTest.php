@@ -1,0 +1,42 @@
+<?php
+
+namespace Tests\Unit;
+
+use App\Models\Task;
+use App\Models\User;
+use Illuminate\Testing\Fluent\AssertableJson;
+use Tests\TestCase;
+
+class TaskControllerTest extends TestCase
+{
+    /**
+     * A basic unit test example.
+     *
+     * @return void
+     */
+    public function test_api_show()
+    {
+        $user = User::factory()->make();
+        
+        $task = new Task([
+            'title' => 'test_title',
+            'body' => 'test_body',
+            'status' => 0,
+            'assignee_id' => null,
+        ]);
+        $task->team_id = 1;
+        $task->save();
+        
+        $response = $this->actingAs($user)->getJson(route('api.task', ['task' => $task]));
+
+        $response->assertOk();
+        $response->assertJson(fn (AssertableJson $json) =>
+            $json->where('team_id', 1)
+                ->where('title', 'test_title')
+                ->where('body', 'test_body')
+                ->where('status', 0)
+                ->where('assignee_id', null)
+                ->etc()
+        );
+    }
+}
