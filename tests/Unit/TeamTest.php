@@ -28,13 +28,13 @@ class TeamTest extends TestCase
         // Teams
         $this->assertEquals($team_count + 1, Team::count());
         $this->assertTrue($team->exists);
-        $this->assertEquals($team->name, $data['name']);
-        $this->assertEquals($team->owner_id, $user->id);
+        $this->assertEquals('teamname', $team->name);
+        $this->assertEquals($user->id, $team->owner_id);
 
         // Members
         $this->assertEquals($member_count + 1, Member::count());
         $this->assertTrue($member->exists);
-        $this->assertEquals($member->user_id, $user->id);
-        $this->assertEquals($member->role, 1);
+        $this->assertEquals($user->id, $member->user_id);
+        $this->assertEquals(1, $member->role);
     }
 }
