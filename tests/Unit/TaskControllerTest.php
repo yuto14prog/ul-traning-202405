@@ -36,7 +36,9 @@ class TaskControllerTest extends TestCase
                 ->where('body', 'test_body')
                 ->where('status', 0)
                 ->where('assignee_id', null)
-                ->etc()
+                ->has('id')
+                ->has('created_at')
+                ->has('updated_at')
         );
     }
 }
