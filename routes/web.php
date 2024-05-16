@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Api\Me\TaskController as ApiMeTaskController;
 use App\Http\Controllers\Api\TaskController as ApiTaskController;
 use App\Http\Controllers\Manager\MemberController;
 use App\Http\Controllers\Manager\TaskController;
@@ -66,4 +67,5 @@ Route::middleware(['auth:sanctum'])
     ->name('api.')
     ->group(function () {
         Route::get('/tasks/{task}', [ApiTaskController::class, 'show'])->name('task');
+        Route::get('/me/tasks', [ApiMeTaskController::class, 'index'])->name('me.index');
     });
