@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\LoginController;
+use App\Http\Controllers\Api\TaskController;
 use App\Http\Controllers\Api\UserController;
 
 /*
@@ -26,3 +27,9 @@ Route::post('logout', [LoginController::class, 'logout']);
 Route::middleware(['auth:sanctum', 'ensureAdmin'])->group(function () {
     Route::apiResource('/users', UserController::class);
 });
+
+Route::middleware(['auth:sanctum'])
+    ->name('api.')
+    ->group(function () {
+        Route::get('/tasks/{task}', [TaskController::class, 'show'])->name('task');
+    });

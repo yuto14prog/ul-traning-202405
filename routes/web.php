@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Api\TaskController as ApiTaskController;
 use App\Http\Controllers\Manager\MemberController;
 use App\Http\Controllers\Manager\TaskController;
 use App\Http\Controllers\Manager\TeamController;
@@ -59,11 +58,3 @@ Route::middleware(['auth'])->group(function () {
     // Controllerはフルパスの指定ができる
     Route::resource('/teams', App\Http\Controllers\TeamController::class, ['only' => ['index', 'create', 'store']]);
 });
-
-// api
-Route::middleware(['auth:sanctum'])
-    ->prefix('api')
-    ->name('api.')
-    ->group(function () {
-        Route::get('/tasks/{task}', [ApiTaskController::class, 'show'])->name('task');
-    });
