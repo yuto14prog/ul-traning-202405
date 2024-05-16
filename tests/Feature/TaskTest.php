@@ -8,7 +8,7 @@ use Illuminate\Testing\Fluent\AssertableJson;
 use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
 
-class TaskControllerTest extends TestCase
+class TaskTest extends TestCase
 {
     /**
      * A basic unit test example.
