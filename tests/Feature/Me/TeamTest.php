@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Me;
 
+use App\Models\Team;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -21,8 +22,11 @@ class TeamTest extends TestCase
         $user = User::factory()->create();
         Sanctum::actingAs($user);
 
+        $team1 = Team::createWithOwner($user, ['name' => 'team1']);
+
         $response = $this->getJson(route('api.me.teams'));
 
         $response->assertOk();
+        $response->assertJsonCount(1);
     }
 }
