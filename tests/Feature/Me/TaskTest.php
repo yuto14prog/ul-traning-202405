@@ -50,7 +50,7 @@ class TaskTest extends TestCase
         $another_task->assignee_id = $another_user->id;
         $another_task->save();
 
-        $response = $this->getJson(route('api.me.index'));
+        $response = $this->getJson(route('api.me.tasks'));
 
         $response->assertOk();
         $response->assertJsonCount(2);

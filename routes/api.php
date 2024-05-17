@@ -33,5 +33,5 @@ Route::middleware(['auth:sanctum'])
     ->name('api.')
     ->group(function () {
         Route::get('/tasks/{task}', [TaskController::class, 'show'])->name('task');
-        Route::get('/me/tasks', [MeTaskController::class, 'index'])->name('me.index');
+        Route::get('/me/tasks', [MeTaskController::class, 'index'])->name('me.tasks');
 });
