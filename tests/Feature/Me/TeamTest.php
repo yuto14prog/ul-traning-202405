@@ -36,6 +36,7 @@ class TeamTest extends TestCase
 
         $response->assertOk();
         $response->assertJsonCount(2);
+        $response->assertJsonCount(6, 0);
         $response->assertJsonStructure([
             '*' => [
                 'id',
@@ -43,6 +44,7 @@ class TeamTest extends TestCase
                 'owner_id',
                 'created_at',
                 'updated_at',
+                'pivot',
                 ]
             ]);
         $response->assertJson([0 => [
