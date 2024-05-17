@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\LoginController;
+use App\Http\Controllers\Api\Me\TaskController as MeTaskController;
 use App\Http\Controllers\Api\TaskController;
 use App\Http\Controllers\Api\UserController;
 
@@ -32,4 +33,5 @@ Route::middleware(['auth:sanctum'])
     ->name('api.')
     ->group(function () {
         Route::get('/tasks/{task}', [TaskController::class, 'show'])->name('task');
-    });
+        Route::get('/me/tasks', [MeTaskController::class, 'index'])->name('me.index');
+});
