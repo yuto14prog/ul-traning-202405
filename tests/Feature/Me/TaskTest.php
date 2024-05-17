@@ -28,22 +28,22 @@ class TaskTest extends TestCase
             'title' => 'title1',
             'body' => 'body1',
             'status' => 0,
-            'assignee_id' => $user->id,
         ]);
         $task1->team_id = $team->id;
+        $task1->assignee_id = $user->id;
         $task1->save();
         $task2 = new Task([
             'title' => 'title2',
             'body' => 'body2',
             'status' => 0,
-            'assignee_id' => $user->id,
         ]);
         $task2->team_id = $team->id;
+        $task2->assignee_id = $user->id;
         $task2->save();
 
         $response = $this->getJson(route('api.me.index'));
 
         $response->assertOk();
-        // $response->assertJsonCount(2);
+        $response->assertJsonCount(2);
     }
 }
