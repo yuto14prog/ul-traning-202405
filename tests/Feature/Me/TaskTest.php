@@ -21,6 +21,7 @@ class TaskTest extends TestCase
     public function test_api_me_tasks()
     {
         $user = User::factory()->create();
+        $another_user = User::factory()->create();
         Sanctum::actingAs($user);
         $team = Team::createWithOwner($user, ['name' => 'test_team']);
 
@@ -40,10 +41,40 @@ class TaskTest extends TestCase
         $task2->team_id = $team->id;
         $task2->assignee_id = $user->id;
         $task2->save();
+        $another_task = new Task([
+            'title' => 'another_title',
+            'body' => 'another_body',
+            'status' => 0,
+        ]);
+        $another_task->team_id = $team->id;
+        $another_task->assignee_id = $another_user->id;
+        $another_task->save();
 
         $response = $this->getJson(route('api.me.index'));
 
         $response->assertOk();
         $response->assertJsonCount(2);
+        $response->assertJsonStructure([
+            '*' => [
+                'assignee_id',
+                'body',
+                'created_at',
+                'id',
+                'status',
+                'team_id',
+                'title',
+                'updated_at',
+            ]
+        ]);
+        $response->assertJson([0 => [
+            'title' => 'title1',
+            'body' => 'body1',
+            'assignee_id' => $user->id]
+        ]);
+        $response->assertJson([1 => [
+            'title' => 'title2',
+            'body' => 'body2',
+            'assignee_id' => $user->id]
+        ]);
     }
 }
