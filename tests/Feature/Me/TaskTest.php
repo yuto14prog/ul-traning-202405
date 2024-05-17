@@ -67,11 +67,13 @@ class TaskTest extends TestCase
             ]
         ]);
         $response->assertJson([0 => [
+            'id' => $task1->id,
             'title' => 'title1',
             'body' => 'body1',
             'assignee_id' => $user->id]
         ]);
         $response->assertJson([1 => [
+            'id' => $task2->id,
             'title' => 'title2',
             'body' => 'body2',
             'assignee_id' => $user->id]
