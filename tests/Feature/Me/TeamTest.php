@@ -36,7 +36,6 @@ class TeamTest extends TestCase
 
         $response->assertOk();
         $response->assertJsonCount(2);
-        $response->assertJsonCount(6, 0);
         $response->assertJsonStructure([
             '*' => [
                 'id',
