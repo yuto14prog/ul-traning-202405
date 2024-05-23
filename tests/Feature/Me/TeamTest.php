@@ -1,0 +1,58 @@
+<?php
+
+namespace Tests\Feature\Me;
+
+use App\Models\Member;
+use App\Models\Team;
+use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
+use Laravel\Sanctum\Sanctum;
+use Tests\TestCase;
+
+class TeamTest extends TestCase
+{
+    use RefreshDatabase;
+    /**
+     * A basic feature test example.
+     *
+     * @return void
+     */
+    public function test_api_me_teams()
+    {
+        $user = User::factory()->create();
+        $another_user = User::factory()->create();
+        Sanctum::actingAs($user);
+
+        $team1 = Team::createWithOwner($user, ['name' => 'team1']);
+        $team2 = Team::createWithOwner($another_user, ['name' => 'team2']);
+        $userTeam2 = new Member();
+        $userTeam2->team_id = $team2->id;
+        $userTeam2->user_id = $user->id;
+        $userTeam2->save();
+        $another_team = Team::createWithOwner($another_user, ['name' => 'another_team']);
+
+        $response = $this->getJson(route('api.me.teams'));
+
+        $response->assertOk();
+        $response->assertJsonCount(2);
+        $response->assertJsonStructure([
+            '*' => [
+                'id',
+                'name',
+                'owner_id',
+                'created_at',
+                'updated_at',
+                'pivot',
+                ]
+            ]);
+        $response->assertJson([0 => [
+            'id' => $team1->id,
+            'name' => 'team1',
+        ]]);
+        $response->assertJson([1 => [
+            'id' => $team2->id,
+            'name' => 'team2',
+        ]]);
+    }
+}
