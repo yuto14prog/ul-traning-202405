@@ -12,7 +12,8 @@
       </div>
       <nav>
         <router-link to="/">Home</router-link> |
-        <router-link to="/about">About</router-link>
+        <router-link to="/about">About</router-link> |
+        <router-link to="/counter">Counter</router-link>
 
         <template v-if="user">
           <template v-if="user.role === 1">

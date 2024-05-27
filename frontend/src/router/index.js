@@ -4,6 +4,8 @@ import LoginView from '../views/LoginView.vue'
 import AdminUsersView from '../views/admin/users/IndexView.vue'
 import AdminUserEditView from '../views/admin/users/EditView.vue'
 import AdminUserCreateView from '../views/admin/users/CreateView.vue'
+import CounterView from '@/views/step5/CounterView.vue'
+import AjaxView from '@/views/step6/AjaxView.vue'
 
 const routes = [
   {
@@ -44,7 +46,15 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  }
+  },
+  {
+    path: '/counter',
+    component: CounterView,
+  },
+  {
+    path: '/ajax-view',
+    component: AjaxView
+  } 
 ]
 
 const router = createRouter({
