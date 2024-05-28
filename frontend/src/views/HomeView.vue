@@ -65,13 +65,21 @@ export default {
     let teams = ref({})
 
     onMounted(async function() {
-        const tasksUrl = '/api/me/tasks'
-        const tasksRes = await axios.get(tasksUrl)
-        tasks.value = tasksRes.data
+        const fetchTasks = async function() {
+            const tasksUrl = '/api/me/tasks'
+            const tasksRes = await axios.get(tasksUrl)
+            tasks.value = tasksRes.data
+        }
+        const fetchTeams = async function() {
+            const teamsUrl = '/api/me/teams'
+            const teamsRes = await axios.get(teamsUrl)
+            teams.value = teamsRes.data
+        }
 
-        const teamsUrl = '/api/me/teams'
-        const teamsRes = await axios.get(teamsUrl)
-        teams.value = teamsRes.data
+        Promise.all([fetchTasks(), fetchTeams()])
+            .catch((error) => {
+                console.error(error.message)
+            })
     })
 
     return {
