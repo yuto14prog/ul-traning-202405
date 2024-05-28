@@ -61,8 +61,8 @@ import { onMounted, ref } from 'vue';
 export default {
   name: 'HomeView',
   setup() {
-    let tasks = ref({})
-    let teams = ref({})
+    let tasks = ref([])
+    let teams = ref([])
 
     onMounted(async function() {
         const fetchTasks = async function() {
