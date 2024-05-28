@@ -8,7 +8,7 @@
         <th>担当者</th>
         <th>作成日時</th>
         <th>操作</th>
-        <tr v-for="(task, index) in tasks" :key="index">
+        <tr v-for="task in tasks" :key="task.id">
             <td>{{ task.team_id }}</td>
             <td>{{ task.id }}</td>
             <td>{{ task.title }}</td>
