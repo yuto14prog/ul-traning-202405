@@ -14,7 +14,7 @@
             <td>{{ task.title }}</td>
             <td>{{ task.assignee_id }}</td>
             <td>{{ task.created_at }}</td>
-            <td>{{ dummy }}</td>
+            <td>dummy</td>
         </tr>
     </table>
   </div>
@@ -42,6 +42,7 @@ export default {
         const url = '/api/me/tasks'
         const res = await axios.get(url)
         tasks.value = await res.data
+        console.log(res.data); // 後で消す
     })
 
     return {
