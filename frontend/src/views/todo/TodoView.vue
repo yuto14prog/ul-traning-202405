@@ -43,9 +43,8 @@ export default {
     }
 
     const toggleDone = function(id) {
-        todos.map((todo) => {
-            if (todo.id === id) todo.done = !todo.done
-        })
+        const todo = todos.find(todo => todo.id === id)
+        todo.done = !todo.done
     }
 
     return {
