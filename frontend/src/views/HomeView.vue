@@ -37,6 +37,9 @@
     th {
         background-color: rgb(197, 197, 197);
     }
+    td {
+        text-align: center;
+    }
 </style>
 
 <script>
