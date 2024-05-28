@@ -17,6 +17,16 @@
             <td>dummy</td>
         </tr>
     </table>
+
+    <h2>所属しているチーム</h2>
+    <table>
+        <th>チームID</th>
+        <th>チーム名</th>
+        <tr v-for="(team, index) in teams" :key="index">
+            <td>{{ team.id }}</td>
+            <td>{{ team.name }}</td>
+        </tr>
+    </table>
   </div>
 </template>
 
@@ -37,16 +47,21 @@ export default {
   name: 'HomeView',
   setup() {
     let tasks = ref({})
+    let teams = ref({})
 
     onMounted(async function() {
-        const url = '/api/me/tasks'
-        const res = await axios.get(url)
-        tasks.value = await res.data
-        console.log(res.data); // 後で消す
+        const tasksUrl = '/api/me/tasks'
+        const tasksRes = await axios.get(tasksUrl)
+        tasks.value = await tasksRes.data
+
+        const teamsUrl = '/api/me/teams'
+        const teamsRes = await axios.get(teamsUrl)
+        teams.value = await teamsRes.data
     })
 
     return {
         tasks,
+        teams,
     }
   }
 }
