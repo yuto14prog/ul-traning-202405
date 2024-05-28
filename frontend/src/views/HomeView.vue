@@ -55,11 +55,11 @@ export default {
     onMounted(async function() {
         const tasksUrl = '/api/me/tasks'
         const tasksRes = await axios.get(tasksUrl)
-        tasks.value = await tasksRes.data
+        tasks.value = tasksRes.data
 
         const teamsUrl = '/api/me/teams'
         const teamsRes = await axios.get(teamsUrl)
-        teams.value = await teamsRes.data
+        teams.value = teamsRes.data
     })
 
     return {
