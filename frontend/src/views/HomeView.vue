@@ -14,7 +14,7 @@
             <td>{{ task.title }}</td>
             <td>{{ task.assignee_id }}</td>
             <td>{{ task.created_at }}</td>
-            <td>dummy</td>
+            <td><router-link :to="{ name: 'task', params: { id: task.id } }">詳細</router-link></td>
         </tr>
     </table>
 
