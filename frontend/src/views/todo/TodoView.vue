@@ -1,13 +1,12 @@
 <template>
   <div class="margin-top">
     <input type="text" v-model="input">
-    <button type="submit" :on-click="addTodo">登録</button>
+    <button type="submit" @click="addTodo">登録</button>
 
     <div v-for="todo in todos" :key="todo.id">
         <input type="checkbox" :id="'checkbox_' + todo.id" @change="toggleDone(todo.id)">
         <label :for="'checkbox_' + todo.id" :class="{'line': todo.done}">{{ todo.text }}</label>
     </div>
-
   </div>
 </template>
 <style scoped>
@@ -32,12 +31,20 @@ export default {
     ])
 
     const addTodo = function() {
+        if (input.value === '') return
 
+        todos.push({
+            id: todos.length + 1,
+            text: input.value,
+            done: false,
+        })
+
+        input.value = ''
     }
 
     const toggleDone = function(id) {
         todos.map((todo) => {
-            if(todo.id === id) todo.done = !todo.done
+            if (todo.id === id) todo.done = !todo.done
         })
     }
 
