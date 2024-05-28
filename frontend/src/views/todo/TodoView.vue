@@ -4,8 +4,8 @@
     <button type="submit" @click="addTodo">登録</button>
 
     <div v-for="todo in todos" :key="todo.id">
-        <input type="checkbox" :id="'checkbox_' + todo.id" @change="toggleDone(todo.id)">
-        <label :for="'checkbox_' + todo.id" :class="{'line': todo.done}">{{ todo.text }}</label>
+        <input type="checkbox" @change="toggleDone(todo.id)" v-show="!todo.done" :checked="todo.done">
+        <span :class="{'line': todo.done}" @click="toggleDone(todo.id)">{{ todo.text }}</span>
     </div>
   </div>
 </template>
