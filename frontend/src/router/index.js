@@ -6,6 +6,7 @@ import AdminUserEditView from '../views/admin/users/EditView.vue'
 import AdminUserCreateView from '../views/admin/users/CreateView.vue'
 import CounterView from '@/views/step5/CounterView.vue'
 import AjaxView from '@/views/step6/AjaxView.vue'
+import TodoView from '@/views/todo/TodoView.vue'
 
 const routes = [
   {
@@ -54,7 +55,11 @@ const routes = [
   {
     path: '/ajax-view',
     component: AjaxView
-  } 
+  },
+  {
+    path: '/todo',
+    component: TodoView
+  }
 ]
 
 const router = createRouter({
