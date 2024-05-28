@@ -21,7 +21,12 @@
 </template>
 
 <style scoped>
-    
+    table {
+        width: 100%;
+    }
+    th {
+        background-color: rgb(197, 197, 197);
+    }
 </style>
 
 <script>
