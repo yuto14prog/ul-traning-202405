@@ -76,10 +76,7 @@ export default {
             teams.value = teamsRes.data
         }
 
-        Promise.all([fetchTasks(), fetchTeams()])
-            .catch((error) => {
-                console.error(error.message)
-            })
+await Promise.all([fetchTasks(), fetchTeams()])
     })
 
     return {
