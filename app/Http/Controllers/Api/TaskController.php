@@ -10,6 +10,8 @@ class TaskController extends Controller
 {
     public function show(Task $task)
     {
-        return response()->json($task);
+        return response()->json(
+            $task::join('teams', 'tasks.team_id', '=', 'teams.id')->where('tasks.id', $task->id)->get()
+        );
     }
 }
