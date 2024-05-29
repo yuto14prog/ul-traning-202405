@@ -1,5 +1,9 @@
 <template>
-    <h2></h2>
+    <div>
+        <h2>{{ task.name }} / {{ task.title }}</h2>
+        <h3>内容</h3>
+        <p>{{ task.body }}</p>
+    </div>
 </template>
 
 <script>
@@ -11,12 +15,12 @@ export default {
     name: 'TaskView',
     setup() {
         const route = useRoute()
-        let task = ref([])
+        let task = ref({})
 
         onMounted(async function() {
             const url = `/api/tasks/${route.params.id}`
             const taskRes = await axios.get(url)
-            task.value = taskRes.data
+            task.value = taskRes.data[0]
         })
 
         return {
