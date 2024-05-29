@@ -76,7 +76,7 @@ export default {
             teams.value = teamsRes.data
         }
 
-await Promise.all([fetchTasks(), fetchTeams()])
+        await Promise.all([fetchTasks(), fetchTeams()])
     })
 
     return {
