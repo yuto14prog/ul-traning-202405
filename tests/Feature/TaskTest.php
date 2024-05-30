@@ -49,8 +49,7 @@ class TaskTest extends TestCase
                     ->has('id')
                     ->has('created_at')
                     ->has('updated_at')
-                    ->has('name')
-                    ->has('owner_id')
+                    ->has('team')
             )
         );
     }
