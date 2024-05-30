@@ -1,5 +1,6 @@
 <template>
-  <div class="home">
+  <h2 v-if="!isAuth">ログインしてください</h2>
+  <div class="home" v-else>
     <h2>アサインされているタスク</h2>
     <table>
         <thead>
@@ -66,6 +67,7 @@ export default {
   setup() {
     let tasks = ref([])
     let teams = ref([])
+    const isAuth = ref(true)
 
     onMounted(async function() {
         const fetchTasks = async function() {
@@ -80,11 +82,16 @@ export default {
         }
 
         await Promise.all([fetchTasks(), fetchTeams()])
+            .catch((err) => {
+                console.log(err);
+                if (axios.isAxiosError(err) && err.response.status == 401) isAuth.value = false
+            })
     })
 
     return {
         tasks,
         teams,
+        isAuth,
     }
   }
 }
