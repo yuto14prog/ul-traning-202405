@@ -38,15 +38,19 @@ class TaskTest extends TestCase
         // $response = $this->actingAs($user)->getJson(route('api.task', ['task' => $task]));
 
         $response->assertOk();
+        $response->assertJsonCount(1);
         $response->assertJson(fn (AssertableJson $json) =>
-            $json->where('team_id', $team->id)
-                ->where('title', 'test_title')
-                ->where('body', 'test_body')
-                ->where('status', 0)
-                ->where('assignee_id', null)
-                ->has('id')
-                ->has('created_at')
-                ->has('updated_at')
+            $json->has(0, fn ($json) => 
+                $json->where('team_id', $team->id)
+                    ->where('title', 'test_title')
+                    ->where('body', 'test_body')
+                    ->where('status', 0)
+                    ->where('assignee_id', null)
+                    ->has('id')
+                    ->has('created_at')
+                    ->has('updated_at')
+                    ->has('team')
+            )
         );
     }
 }

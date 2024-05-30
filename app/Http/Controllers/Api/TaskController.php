@@ -10,6 +10,8 @@ class TaskController extends Controller
 {
     public function show(Task $task)
     {
-        return response()->json($task);
+        return response()->json(
+            Task::with('team')->where('id', $task->id)->get()
+        );
     }
 }
