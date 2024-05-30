@@ -72,13 +72,17 @@ class TaskTest extends TestCase
             'id' => $task1->id,
             'title' => 'title1',
             'body' => 'body1',
-            'assignee_id' => $user->id]
+            'assignee_id' => $user->id,
+            'assignee' => ['id' => $user->id],
+            'team' => ['id' => $team->id]]
         ]);
         $response->assertJson([1 => [
             'id' => $task2->id,
             'title' => 'title2',
             'body' => 'body2',
-            'assignee_id' => $user->id]
+            'assignee_id' => $user->id,
+            'assignee' => ['id' => $user->id],
+            'team' => ['id' => $team->id]]
         ]);
     }
 }
