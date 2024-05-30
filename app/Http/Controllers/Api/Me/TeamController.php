@@ -12,7 +12,7 @@ class TeamController extends Controller
     {
         $user = Auth::user();
         $team = $user->teams()
-            ->with([ 'members' => function($query) {$query->where('user_id', Auth::user()->id);} ])
+            ->with([ 'members' => function($query) use ($user) {$query->where('user_id', $user->id);} ])
             ->get();
 
         return response()->json($team);
