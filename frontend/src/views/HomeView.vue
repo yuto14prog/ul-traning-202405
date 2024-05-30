@@ -30,12 +30,15 @@
             <tr>
                 <th>チームID</th>
                 <th>チーム名</th>
+                <th>役割</th>
             </tr>
         </thead>
         <tbody>
             <tr v-for="(team, index) in teams" :key="index">
                 <td>{{ team.id }}</td>
                 <td>{{ team.name }}</td>
+                <td v-if="team.members[0].role === 1">マネージャー</td>
+                <td v-else>通常</td>
             </tr>
         </tbody>
     </table>
