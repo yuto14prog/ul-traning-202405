@@ -15,7 +15,7 @@ export default {
     name: 'TaskView',
     setup() {
         const route = useRoute()
-        let task = ref({})
+        const task = ref({})
 
         onMounted(async function() {
             const url = `/api/tasks/${route.params.id}`
