@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h2>{{ task.name }} / {{ task.title }}</h2>
+        <h2 v-if="task.team">{{ task.team.name }} / {{ task.title }}</h2>
         <h3>内容</h3>
         <p>{{ task.body }}</p>
     </div>
@@ -15,7 +15,7 @@ export default {
     name: 'TaskView',
     setup() {
         const route = useRoute()
-        let task = ref({})
+        const task = ref({})
 
         onMounted(async function() {
             const url = `/api/tasks/${route.params.id}`
