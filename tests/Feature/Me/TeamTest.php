@@ -44,6 +44,7 @@ class TeamTest extends TestCase
                 'created_at',
                 'updated_at',
                 'pivot',
+                'members',
                 ]
             ]);
         $response->assertJson([0 => [
