@@ -12,12 +12,12 @@
                 <th>操作</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody v-if="tasks != []">
             <tr v-for="task in tasks" :key="task.id">
-                <td>{{ task.team_id }}</td>
+                <td>{{ task.team.name }}</td>
                 <td>{{ task.id }}</td>
                 <td>{{ task.title }}</td>
-                <td>{{ task.assignee_id }}</td>
+                <td>{{ task.assignee.name }}</td>
                 <td>{{ task.created_at }}</td>
                 <td><router-link :to="{ name: 'task', params: {id: task.id} }">詳細</router-link></td>
             </tr>
