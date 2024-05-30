@@ -11,6 +11,10 @@ class TeamController extends Controller
     public function index()
     {
         $user = Auth::user();
-        return response()->json($user->teams);
+        $team = $user->teams()
+            ->with([ 'members' => function($query) use ($user) {$query->where('user_id', $user->id);} ])
+            ->get();
+
+        return response()->json($team);
     }
 }

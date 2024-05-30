@@ -64,6 +64,8 @@ class TaskTest extends TestCase
                 'team_id',
                 'title',
                 'updated_at',
+                'team',
+                'assignee',
             ]
         ]);
         $response->assertJson([0 => [
