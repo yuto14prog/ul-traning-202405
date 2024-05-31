@@ -67,7 +67,7 @@ export default {
   setup() {
     let tasks = ref([])
     let teams = ref([])
-    const isAuth = ref(true)
+    const isAuth = ref(false)
 
     onMounted(async function() {
         const fetchTasks = async function() {
@@ -81,11 +81,14 @@ export default {
             teams.value = teamsRes.data
         }
 
-        await Promise.all([fetchTasks(), fetchTeams()])
-            .catch((err) => {
-                console.log(err);
-                if (axios.isAxiosError(err) && err.response.status == 401) isAuth.value = false
-            })
+        try {
+            await Promise.all([fetchTasks(), fetchTeams()])
+            isAuth.value = true
+        } catch (err) {
+            if (axios.isAxiosError(err) && err.response.status == 401) {
+                isAuth.value = false
+            }
+        }
     })
 
     return {

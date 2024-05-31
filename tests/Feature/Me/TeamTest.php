@@ -36,6 +36,8 @@ class TeamTest extends TestCase
 
         $response->assertOk();
         $response->assertJsonCount(2);
+        $response->assertJsonCount(1, '0.members');
+        $response->assertJsonCount(1, '1.members');
         $response->assertJsonStructure([
             '*' => [
                 'id',
@@ -50,10 +52,20 @@ class TeamTest extends TestCase
         $response->assertJson([0 => [
             'id' => $team1->id,
             'name' => 'team1',
+            'members' => [ 0 => [
+                'user_id' => $user->id,
+                'team_id' => $team1->id,
+                'role' => 1
+            ]],
         ]]);
         $response->assertJson([1 => [
             'id' => $team2->id,
             'name' => 'team2',
+            'members' => [ 0 => [
+                'user_id' => $user->id,
+                'team_id' => $team2->id,
+                'role' => 0
+            ]],
         ]]);
     }
 }
