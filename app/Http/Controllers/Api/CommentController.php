@@ -27,5 +27,10 @@ class CommentController extends Controller
         $comment->task_id = $task->id;
         $comment->author_id = Auth::user()->id;
         $comment->save();
+
+        if ($comment->kind === 1) { // modelに移す
+            $task->status = 1;
+            $task->save();
+        }
     }
 }
