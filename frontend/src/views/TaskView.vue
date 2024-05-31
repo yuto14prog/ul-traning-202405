@@ -22,6 +22,10 @@
         </form>
     </div>
 
+    <div v-else-if="status === 'loading'">
+        <span>Loading</span>
+    </div>
+
     <div v-else>
         <h2>ログインしてください</h2>
     </div>
@@ -50,7 +54,7 @@ const comments = ref({})
 const message = ref('')
 const kind = ref(0)
 const errorMessage = ref()
-const status = ref()
+const status = ref('loading')
 
 onMounted(async function() {
     try {
@@ -72,6 +76,7 @@ const submit = async function() {
             message: message.value,
             kind: kind.value,
         })
+        window.location.reload(); // ここが強引？？？
     } catch (err) {
         if (axios.isAxiosError(err) && err.response.status == 422) {
             errorMessage.value = '本文は必須です'
@@ -81,7 +86,3 @@ const submit = async function() {
     }
 }
 </script>
-
-<!-- Todo
-タイムゾーン -->
-<!-- ページステータス -->
