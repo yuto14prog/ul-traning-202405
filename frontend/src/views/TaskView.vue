@@ -53,8 +53,11 @@ onMounted(async function() {
     }
 })
 
-const submit = function() {
-    console.log(message.value, kind.value);
+const submit = async function() {
+    await axios.post(`/api/tasks/${route.params.id}/comments`, {
+        message: message.value,
+        kind: kind.value,
+    }) // エラー処理する
 }
 </script>
 
