@@ -9,12 +9,23 @@
             <p>{{ comment.message }}</p>
             <p>{{ comment.created_at }} by {{ comment.user.name }}</p>
         </div>
+
+        <span>本文</span>
+        <form @submit.prevent>
+            <textarea rows="5" v-model="message"></textarea>
+            <label for="kind">完了報告とする</label>
+            <input type="checkbox" id="kind" v-model="kind"><br>
+            <button type="submit" @click="submit">送信</button>
+        </form>
     </div>
 </template>
 
 <style>
 .comment + .comment {
     border-top: 2px solid gray;
+}
+textarea {
+    width: 100%;
 }
 </style>
 
@@ -26,6 +37,8 @@ import { useRoute } from 'vue-router'
 const route = useRoute()
 const task = ref({})
 const comments = ref({})
+const message = ref('')
+const kind = ref(0)
 
 onMounted(async function() {
     try {
@@ -39,4 +52,11 @@ onMounted(async function() {
         console.log(err); // エラー処理、ページの状態管理は後で
     }
 })
+
+const submit = function() {
+    console.log(message.value, kind.value);
+}
 </script>
+
+<!-- Todo
+タイムゾーン -->
