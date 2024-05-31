@@ -16,12 +16,22 @@ class TeamSeeder extends Seeder
     public function run()
     {
         DB::table('teams')->insert([
-            'name' => 'test1',
-            'owner_id' => '1',
+            'name' => 'team1',
+            'owner_id' => 1,
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
         DB::table('teams')->insert([
-            'name' => 'test2',
-            'owner_id' => '2',
+            'name' => 'team2',
+            'owner_id' => 2,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('teams')->insert([
+            'name' => 'team3',
+            'owner_id' => 3,
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
     }
 }

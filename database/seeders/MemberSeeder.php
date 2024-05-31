@@ -17,12 +17,38 @@ class MemberSeeder extends Seeder
     {
         DB::table('members')->insert([
             'team_id' => 1,
-            'user_id' => 2,
+            'user_id' => 1,
             'role' => 1,
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
         DB::table('members')->insert([
             'team_id' => 2,
+            'user_id' => 2,
+            'role' => 1,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('members')->insert([
+            'team_id' => 3,
             'user_id' => 3,
+            'role' => 1,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('members')->insert([
+            'team_id' => 1,
+            'user_id' => 2,
+            'role' => 0,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('members')->insert([
+            'team_id' => 1,
+            'user_id' => 3,
+            'role' => 0,
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
     }
 }
