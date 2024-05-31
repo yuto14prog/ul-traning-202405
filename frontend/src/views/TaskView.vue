@@ -14,8 +14,10 @@
         <form @submit.prevent>
             <textarea rows="5" v-model="message"></textarea>
             <span v-if="errorMessage" class="error">{{ errorMessage }}</span><br>
-            <label for="kind">完了報告とする</label>
-            <input type="checkbox" id="kind" v-model="kind"><br>
+            <div v-if="task.status === 0">
+                <label for="kind">完了報告とする</label>
+                <input type="checkbox" id="kind" v-model="kind"><br>
+            </div>
             <button type="submit" @click="submit">送信</button>
         </form>
     </div>
@@ -77,3 +79,4 @@ const submit = async function() {
 
 <!-- Todo
 タイムゾーン -->
+<!-- ページステータス -->
