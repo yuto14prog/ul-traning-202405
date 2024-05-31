@@ -11,8 +11,9 @@ class TaskController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $tasks = $user->tasks;
         
-        return response()->json($tasks);
+        return response()->json(
+            $user->tasks()->with('team', 'assignee')->get()
+        );
     }
 }
