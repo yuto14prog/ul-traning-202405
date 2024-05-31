@@ -82,7 +82,7 @@ const submit = async function() {
     try {
         await axios.post(`/api/tasks/${route.params.id}/comments`, {
             message: message.value,
-            kind: kind.value,
+            kind: Number(kind.value),
         })
         window.location.reload(); // ここが強引？？？
     } catch (err) {

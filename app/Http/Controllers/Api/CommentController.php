@@ -20,6 +20,7 @@ class CommentController extends Controller
         // FormRequestにする
         $validated = $request->validate([
             'message' => 'required|max:50',
+            'kind' => 'integer'
         ]);
 
         $comment = new Comment($validated);
