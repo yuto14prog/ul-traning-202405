@@ -5,12 +5,18 @@
         <p>{{ task.body }}</p>
 
         <h2>コメント</h2>
-        <div v-for="comment in comments" :key="comment.id">
+        <div v-for="comment in comments" :key="comment.id" class="comment">
             <p>{{ comment.message }}</p>
             <p>{{ comment.created_at }} by {{ comment.user.name }}</p>
         </div>
     </div>
 </template>
+
+<style>
+.comment + .comment {
+    border-top: 2px solid gray;
+}
+</style>
 
 <script setup>
 import axios from 'axios';
