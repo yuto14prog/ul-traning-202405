@@ -1,5 +1,9 @@
 <template>
     <div v-if="status === 'available'">
+        <div v-if="task.status === 1" class="done">
+            <p>このタスクは完了しました</p>
+        </div>
+
         <h2 v-if="task.team">{{ task.team.name }} / {{ task.title }}</h2>
         <h3>内容</h3>
         <p>{{ task.body }}</p>
@@ -40,6 +44,10 @@ textarea {
 }
 .error {
     color: red;
+}
+.done {
+    margin-top: 1rem;
+    border: 1px solid black;
 }
 </style>
 
