@@ -80,11 +80,16 @@ onMounted(async function() {
 
 const submit = async function() {
     try {
-        await axios.post(`/api/tasks/${route.params.id}/comments`, {
+        const res = await axios.post(`/api/tasks/${route.params.id}/comments`, {
             message: message.value,
             kind: Number(kind.value),
         })
-        window.location.reload(); // ここが強引？？？
+        comments.value.push(res.data);
+        message.value = ''
+        errorMessage.value = ''
+        if (kind.value == 1) {
+            task.value.status = 1
+        }
     } catch (err) {
         if (axios.isAxiosError(err) && err.response.status == 422) {
             errorMessage.value = '本文は必須です'
