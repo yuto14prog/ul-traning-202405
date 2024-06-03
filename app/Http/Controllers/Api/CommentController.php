@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CommentRequest;
 use App\Models\Comment;
 use App\Models\Task;
 use Illuminate\Http\Request;
@@ -15,15 +16,15 @@ class CommentController extends Controller
         return response()->json($task->comments()->with('user')->get());
     }
 
-    public function store(Request $request, Task $task) // testする
+    public function store(CommentRequest $request, Task $task) // testする
     {
         // FormRequestにする
-        $validated = $request->validate([
-            'message' => 'required|max:50',
-            'kind' => 'integer'
-        ]);
+        // $validated = $request->validate([
+        //     'message' => 'required|max:50',
+        //     'kind' => 'integer'
+        // ]);
 
-        $comment = new Comment($validated);
+        $comment = new Comment($request->validate());
         $comment->task_id = $task->id;
         $comment->author_id = Auth::user()->id;
         $comment->save();
