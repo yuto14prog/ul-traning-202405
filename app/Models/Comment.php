@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class Comment extends Model
 {
@@ -24,17 +25,19 @@ class Comment extends Model
 
     public static function saveComment(Task $task, $validated)
     {
-        // トランザクションする
-        $comment = new self($validated);
-        $comment->task_id = $task->id;
-        $comment->author_id = Auth::user()->id;
-        $comment->save();
+        return DB::transaction(function () use ($task, $validated)
+        {
+            $comment = new self($validated);
+            $comment->task_id = $task->id;
+            $comment->author_id = Auth::user()->id;
+            $comment->save();
+    
+            if ($comment->kind === 1) {
+                $task->status = 1;
+                $task->save();
+            }
 
-        if ($comment->kind === 1) {
-            $task->status = 1;
-            $task->save();
-        }
-
-        return $comment->with('user')->orderBy('id', 'desc')->first();
+            return $comment->with('user')->orderBy('id', 'desc')->first();
+        });
     }
 }
