@@ -13,7 +13,7 @@
                 <th>操作</th>
             </tr>
         </thead>
-        <tbody v-if="tasks != []">
+        <tbody>
             <tr v-for="task in tasks" :key="task.id">
                 <td>{{ task.team.name }}</td>
                 <td>{{ task.id }}</td>
