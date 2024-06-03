@@ -118,24 +118,22 @@ class CommentTest extends TestCase
         $task->assignee_id = $user->id;
         $task->save();
 
-        Comment::saveComment($task, ['message' => '1_message', 'kind' => 0]);
-        $comments = Comment::all();
+        $comment = Comment::saveComment($task, ['message' => '1_message', 'kind' => 0]);
         
         $this->assertEquals(Comment::count(), 1);
-        $this->assertEquals($comments[0]->message, '1_message');
-        $this->assertEquals($comments[0]->kind, 0);
-        $this->assertEquals($comments[0]->task_id, $task->id);
-        $this->assertEquals($comments[0]->author_id, $user->id);
+        $this->assertEquals($comment->message, '1_message');
+        $this->assertEquals($comment->kind, 0);
+        $this->assertEquals($comment->task_id, $task->id);
+        $this->assertEquals($comment->author_id, $user->id);
         $this->assertEquals($task->status, 0);
 
-        Comment::saveComment($task, ['message' => '2_message', 'kind' => 1]);
-        $comments = Comment::all();
+        $comment = Comment::saveComment($task, ['message' => '2_message', 'kind' => 1]);
 
         $this->assertEquals(Comment::count(), 2);
-        $this->assertEquals($comments[1]->message, '2_message');
-        $this->assertEquals($comments[1]->kind, 1);
-        $this->assertEquals($comments[1]->task_id, $task->id);
-        $this->assertEquals($comments[1]->author_id, $user->id);
+        $this->assertEquals($comment->message, '2_message');
+        $this->assertEquals($comment->kind, 1);
+        $this->assertEquals($comment->task_id, $task->id);
+        $this->assertEquals($comment->author_id, $user->id);
         $this->assertEquals($task->status, 1);
     }
 }
