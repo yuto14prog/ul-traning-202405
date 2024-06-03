@@ -58,44 +58,33 @@
     }
 </style>
 
-<script>
+<script setup>
 import axios from 'axios';
 import { onMounted, ref } from 'vue';
 
-export default {
-  name: 'HomeView',
-  setup() {
-    let tasks = ref([])
-    let teams = ref([])
-    const isAuth = ref(false)
+let tasks = ref([])
+let teams = ref([])
+const isAuth = ref(false)
 
-    onMounted(async function() {
-        const fetchTasks = async function() {
-            const tasksUrl = '/api/me/tasks'
-            const tasksRes = await axios.get(tasksUrl)
-            tasks.value = tasksRes.data
-        }
-        const fetchTeams = async function() {
-            const teamsUrl = '/api/me/teams'
-            const teamsRes = await axios.get(teamsUrl)
-            teams.value = teamsRes.data
-        }
-
-        try {
-            await Promise.all([fetchTasks(), fetchTeams()])
-            isAuth.value = true
-        } catch (err) {
-            if (axios.isAxiosError(err) && err.response.status == 401) {
-                isAuth.value = false
-            }
-        }
-    })
-
-    return {
-        tasks,
-        teams,
-        isAuth,
+onMounted(async function() {
+    const fetchTasks = async function() {
+        const tasksUrl = '/api/me/tasks'
+        const tasksRes = await axios.get(tasksUrl)
+        tasks.value = tasksRes.data
     }
-  }
-}
+    const fetchTeams = async function() {
+        const teamsUrl = '/api/me/teams'
+        const teamsRes = await axios.get(teamsUrl)
+        teams.value = teamsRes.data
+    }
+
+    try {
+        await Promise.all([fetchTasks(), fetchTeams()])
+        isAuth.value = true
+    } catch (err) {
+        if (axios.isAxiosError(err) && err.response.status == 401) {
+            isAuth.value = false
+        }
+    }
+})
 </script>
