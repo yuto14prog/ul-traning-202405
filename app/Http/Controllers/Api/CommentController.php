@@ -18,13 +18,7 @@ class CommentController extends Controller
 
     public function store(CommentRequest $request, Task $task) // testする
     {
-        // FormRequestにする
-        // $validated = $request->validate([
-        //     'message' => 'required|max:50',
-        //     'kind' => 'integer'
-        // ]);
-
-        $comment = new Comment($request->validate());
+        $comment = new Comment($request->all());
         $comment->task_id = $task->id;
         $comment->author_id = Auth::user()->id;
         $comment->save();
