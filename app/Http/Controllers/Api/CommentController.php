@@ -18,6 +18,6 @@ class CommentController extends Controller
 
     public function store(CommentRequest $request, Task $task)
     {
-        Comment::saveComment($task, $request->all());
+        return Comment::saveComment($task, $request->all());
     }
 }

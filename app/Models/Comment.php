@@ -24,6 +24,7 @@ class Comment extends Model
 
     public static function saveComment(Task $task, $validated)
     {
+        // トランザクションする
         $comment = new self($validated);
         $comment->task_id = $task->id;
         $comment->author_id = Auth::user()->id;
@@ -33,5 +34,7 @@ class Comment extends Model
             $task->status = 1;
             $task->save();
         }
+
+        return $comment->with('user')->orderBy('id', 'desc')->first();
     }
 }
