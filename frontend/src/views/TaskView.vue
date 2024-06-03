@@ -11,7 +11,7 @@
         <h2>コメント</h2>
         <div v-for="comment in comments" :key="comment.id" class="comment">
             <p>{{ comment.message }}</p>
-            <p>{{ comment.created_at }} by {{ comment.user.name }}</p>
+            <p>{{ formatDate(comment.created_at) }} by {{ comment.user.name }}</p>
         </div>
 
         <span>本文</span>
@@ -97,5 +97,11 @@ const submit = async function() {
             errorMessage.value = '予期せぬエラーです'
         }
     }
+}
+
+const formatDate = function(created_at) {
+    let date = new Date(created_at);
+    let formatted = date.toLocaleString('ja-JP', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' });
+    return formatted
 }
 </script>
