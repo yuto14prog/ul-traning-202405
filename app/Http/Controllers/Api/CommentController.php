@@ -11,13 +11,13 @@ use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
-    public function index(Task $task) // testする
+    public function index(Task $task)
     {
         return response()->json($task->comments()->with('user')->get());
     }
 
-    public function store(CommentRequest $request, Task $task) // testする
+    public function store(CommentRequest $request, Task $task)
     {
-        Comment::saveComment($task, $request->all()); // testする
+        Comment::saveComment($task, $request->all());
     }
 }
