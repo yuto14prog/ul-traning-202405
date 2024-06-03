@@ -18,14 +18,6 @@ class CommentController extends Controller
 
     public function store(CommentRequest $request, Task $task) // testする
     {
-        $comment = new Comment($request->all());
-        $comment->task_id = $task->id;
-        $comment->author_id = Auth::user()->id;
-        $comment->save();
-
-        if ($comment->kind === 1) { // modelに移す
-            $task->status = 1;
-            $task->save();
-        }
+        Comment::saveComment($task, $request->all()); // testする
     }
 }
