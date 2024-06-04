@@ -11,7 +11,7 @@ class Comment extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['message', 'kind',];
+    protected $fillable = ['message', 'kind'];
 
     public function task()
     {
