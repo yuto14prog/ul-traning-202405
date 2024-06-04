@@ -49,7 +49,7 @@ class CommentTest extends TestCase
         $comment2->author_id = $user2->id;
         $comment2->save();
 
-        $response = $this->get(route('api.comments.index', ['task' => $task->id]));
+        $response = $this->get(route('api.tasks.comments.index', ['task' => $task->id]));
 
         $response->assertStatus(200);
         $response->assertJsonCount(2);
@@ -93,7 +93,7 @@ class CommentTest extends TestCase
 
         $count = Comment::count();
         $response = $this->postJson(
-            route('api.comments.store', ['task' => $task->id]),
+            route('api.tasks.comments.store', ['task' => $task->id]),
             ['message' => 'test_message', 'kind' => 0]
         );
         $comment = Comment::latest()->first();
@@ -107,7 +107,7 @@ class CommentTest extends TestCase
 
         $count = Comment::count();
         $response = $this->postJson(
-            route('api.comments.store', ['task' => $task->id]),
+            route('api.tasks.comments.store', ['task' => $task->id]),
             ['message' => '', 'kind' => 0]
         );
         $response->assertStatus(422);
