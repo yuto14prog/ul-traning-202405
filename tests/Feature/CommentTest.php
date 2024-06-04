@@ -91,6 +91,7 @@ class CommentTest extends TestCase
         $task->assignee_id = $user->id;
         $task->save();
 
+        $count = Comment::count();
         $response = $this->postJson(
             route('api.comments.store', ['task' => $task->id]),
             ['message' => 'test_message', 'kind' => 0]
@@ -98,7 +99,7 @@ class CommentTest extends TestCase
         $comment = Comment::latest()->first();
 
         $response->assertStatus(201);
-        $this->assertEquals(Comment::count(), 1);
+        $this->assertEquals(Comment::count(), $count + 1);
         $this->assertEquals($comment->task_id, $task->id);
         $this->assertEquals($comment->author_id, $user->id);
         $this->assertEquals($comment->message, 'test_message');
