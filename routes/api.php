@@ -37,5 +37,5 @@ Route::middleware(['auth:sanctum'])
         Route::get('/tasks/{task}', [TaskController::class, 'show'])->name('task');
         Route::get('/me/tasks', [MeTaskController::class, 'index'])->name('me.tasks');
         Route::get('/me/teams', [MeTeamController::class, 'index'])->name('me.teams');
-        Route::resource('/tasks/{task}/comments', CommentController::class, ['only' => ['index', 'store']]);
+        Route::resource('/tasks.comments', CommentController::class, ['only' => ['index', 'store']]);
 });
