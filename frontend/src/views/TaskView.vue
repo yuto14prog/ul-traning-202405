@@ -27,7 +27,7 @@
     </div>
 
     <div v-else-if="status === 'loading'">
-        <span>Loading</span>
+        <span>Loading...</span>
     </div>
 
     <div v-else>
