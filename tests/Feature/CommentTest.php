@@ -78,7 +78,7 @@ class CommentTest extends TestCase
         );
     }
 
-    public function test_api_comment_post()
+    public function test_api_can_comment_post()
     {
         $user = User::factory()->create();
         Sanctum::actingAs($user);
@@ -104,6 +104,20 @@ class CommentTest extends TestCase
         $this->assertEquals($comment->author_id, $user->id);
         $this->assertEquals($comment->message, 'test_message');
         $this->assertEquals($comment->kind, 0);
+    }
+
+    public function test_api_cannot_comment_post_with_null_comment()
+    {
+        $user = User::factory()->create();
+        Sanctum::actingAs($user);
+        $team = Team::createWithOwner($user, ['name' => 'test_team']);
+        $task = new Task([
+            'title' => 'task_title',
+            'body' => 'task_body',
+        ]);
+        $task->team_id = $team->id;
+        $task->assignee_id = $user->id;
+        $task->save();
 
         $count = Comment::count();
         $response = $this->postJson(
