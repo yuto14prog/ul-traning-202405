@@ -104,5 +104,14 @@ class CommentTest extends TestCase
         $this->assertEquals($comment->author_id, $user->id);
         $this->assertEquals($comment->message, 'test_message');
         $this->assertEquals($comment->kind, 0);
+
+        $count = Comment::count();
+        $response = $this->postJson(
+            route('api.comments.store', ['task' => $task->id]),
+            ['message' => '', 'kind' => 0]
+        );
+        $response->assertStatus(422);
+        $response->assertJson(['message' => 'messageは必須です。']);
+        $this->assertEquals(Comment::count(), $count);
     }
 }
