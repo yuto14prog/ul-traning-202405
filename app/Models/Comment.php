@@ -27,11 +27,11 @@ class Comment extends Model
     {
         return DB::transaction(function () use ($task, $validated)
         {
-            $comment = new self($validated);
+            $comment = new Comment($validated);
             $comment->task_id = $task->id;
             $comment->author_id = Auth::user()->id;
             $comment->save();
-    
+
             if ($comment->kind === 1) {
                 $task->status = 1;
                 $task->save();
