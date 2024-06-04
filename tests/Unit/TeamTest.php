@@ -5,10 +5,12 @@ namespace Tests\Unit;
 use App\Models\Member;
 use App\Models\Team;
 use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class TeamTest extends TestCase
 {
+    use RefreshDatabase;
     /**
      * A basic unit test example.
      *
