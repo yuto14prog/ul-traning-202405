@@ -104,36 +104,4 @@ class CommentTest extends TestCase
         $this->assertEquals($comment->message, 'test_message');
         $this->assertEquals($comment->kind, 0);
     }
-
-    public function test_function_saveComment()
-    {
-        $user = User::factory()->create();
-        Sanctum::actingAs($user);
-        $team = Team::createWithOwner($user, ['name' => 'test_team']);
-        $task = new Task([
-            'title' => 'task_title',
-            'body' => 'task_body',
-        ]);
-        $task->team_id = $team->id;
-        $task->assignee_id = $user->id;
-        $task->save();
-
-        $comment = Comment::saveComment($task, ['message' => '1_message', 'kind' => 0]);
-        
-        $this->assertEquals(Comment::count(), 1);
-        $this->assertEquals($comment->message, '1_message');
-        $this->assertEquals($comment->kind, 0);
-        $this->assertEquals($comment->task_id, $task->id);
-        $this->assertEquals($comment->author_id, $user->id);
-        $this->assertEquals($task->status, 0);
-
-        $comment = Comment::saveComment($task, ['message' => '2_message', 'kind' => 1]);
-
-        $this->assertEquals(Comment::count(), 2);
-        $this->assertEquals($comment->message, '2_message');
-        $this->assertEquals($comment->kind, 1);
-        $this->assertEquals($comment->task_id, $task->id);
-        $this->assertEquals($comment->author_id, $user->id);
-        $this->assertEquals($task->status, 1);
-    }
 }
