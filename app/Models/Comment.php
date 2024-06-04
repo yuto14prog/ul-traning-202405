@@ -37,7 +37,7 @@ class Comment extends Model
                 $task->save();
             }
 
-            return $comment->with('user')->orderBy('id', 'desc')->first();
+            return $comment;
         });
     }
 }

@@ -97,7 +97,7 @@ class CommentTest extends TestCase
         );
         $comment = (Comment::all())[0];
 
-        $response->assertStatus(200);
+        $response->assertStatus(201);
         $this->assertEquals(Comment::count(), 1);
         $this->assertEquals($comment->task_id, $task->id);
         $this->assertEquals($comment->author_id, $user->id);
