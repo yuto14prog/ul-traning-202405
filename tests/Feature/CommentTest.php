@@ -95,7 +95,7 @@ class CommentTest extends TestCase
             route('api.comments.store', ['task' => $task->id]),
             ['message' => 'test_message', 'kind' => 0]
         );
-        $comment = (Comment::all())[0];
+        $comment = Comment::latest()->first();
 
         $response->assertStatus(201);
         $this->assertEquals(Comment::count(), 1);
