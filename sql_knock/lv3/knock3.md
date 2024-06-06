@@ -12,7 +12,7 @@ SELECT * FROM tasks WHERE team_id = 1;
 ```sql
 SELECT tasks.*, count(comments.id) as comment_count
 FROM tasks
-JOIN comments ON comments.task_id = tasks.id
+LEFT OUTER JOIN comments ON comments.task_id = tasks.id
 GROUP BY tasks.id;
 ```
 

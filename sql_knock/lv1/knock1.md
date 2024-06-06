@@ -15,7 +15,9 @@ SELECT name, email FROM users;
 
 4. 特定のユーザーのチームを取得するクエリを書いてください。
 ```sql
-SELECT * FROM teams WHERE owner_id = 1;
+SELECT * FROM teams
+JOIN members ON teams.id = members.team_id
+WHERE members.user_id = 1;
 ```
 
 5. 特定のタスクに対する全てのコメントを取得するクエリを書いてください。

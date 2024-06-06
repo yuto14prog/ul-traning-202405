@@ -1,6 +1,8 @@
 1. 全てのタスクとそれに対応するチーム名を取得するクエリを書いてください。
 ```sql
-SELECT tasks.*, teams.name as team_name FROM tasks JOIN teams ON tasks.team_id = teams.id;
+SELECT tasks.*, teams.name as team_name
+FROM tasks
+JOIN teams ON tasks.team_id = teams.id;
 ```
 
 2. 特定のユーザーがアサインされているタスクを取得するクエリを書いてください。

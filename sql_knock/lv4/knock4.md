@@ -25,7 +25,7 @@ WHERE comments.task_id = 1;
 
 4. 特定のユーザーがアサインされているタスクの数を取得するクエリを書いてください。
 ```sql
-SELECT count(tasks.id) as tasks_count
+SELECT users.name, count(tasks.id) as tasks_count
 FROM tasks
 JOIN users ON tasks.assignee_id = users.id
 WHERE users.id = 1;
