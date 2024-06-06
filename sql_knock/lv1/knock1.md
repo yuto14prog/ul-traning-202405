@@ -37,9 +37,7 @@
     ```
 - Laravel
     ```php
-    Team::join('members', 'teams.id', '=', 'members.team_id')
-        ->where('members.user_id', 1)
-        ->get();
+    User::find(1)->teams;
     ```
 
 5. 特定のタスクに対する全てのコメントを取得するクエリを書いてください。
@@ -49,5 +47,5 @@
     ```
 - Laravel
     ```php
-    Comment::where('task_id', 1)->get();
+    Task::find(1)->comments;
     ```

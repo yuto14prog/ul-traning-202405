@@ -7,9 +7,7 @@
     ```
 - Laravel
     ```php
-    Task::select('tasks.*', 'teams.name as team_name')
-        ->join('teams', 'tasks.team_id', '=', 'teams.id')
-        ->get();
+    Task::with('team')->get();
     ```
 
 2. 特定のユーザーがアサインされているタスクを取得するクエリを書いてください。
@@ -22,9 +20,7 @@
     ```
 - Laravel
     ```php
-    Task::with('assignee')
-        ->where('assignee_id', 1)
-        ->get();
+    User::find(1)->tasks;
     ```
 
 3. 特定のチームに所属している全てのメンバーの情報を取得するクエリを書いてください。
@@ -37,9 +33,7 @@
     ```
 - Laravel
     ```php
-    Member::with('user')
-        ->where('team_id', 1)
-        ->get();
+    Team::find(1)->members;
     ```
 
 4. 特定のユーザーが作成したチームの情報を取得するクエリを書いてください。

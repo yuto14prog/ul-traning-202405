@@ -56,9 +56,7 @@
     ```
 - Laravel
     ```php
-    User::withCount('tasks')
-        ->where('id', 1)
-        ->get();
+    Task::where('assignee_id', 1)->count();
     ```
 
 5. 全てのチームと、そのチームに所属しているメンバーの数を取得するクエリを書いてください。
