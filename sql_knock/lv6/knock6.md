@@ -30,7 +30,28 @@
     HAVING average > 7
     ```
 
-3. チームごとに各タスクに対する平均コメント数を計算し、平均コメント数が2を超えるタスクのみを表示してください。
+3. チームごとに各タスクに対する平均コメント数を計算し、平均コメント数が2を超えるチームのみを表示してください。
 - SQL
     ```sql
+    SELECT
+        t.id AS team_id,
+        AVG(c.comment_count) AS avg_comments
+    FROM
+        teams t
+    JOIN
+        tasks ts ON t.id = ts.team_id
+    JOIN
+        (
+            SELECT
+                task_id,
+                COUNT(*) AS comment_count
+            FROM
+                comments
+            GROUP BY
+                task_id
+        ) c ON ts.id = c.task_id
+    GROUP BY
+        t.id
+    HAVING
+        AVG(c.comment_count) > 2;
     ```
