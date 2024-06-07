@@ -1,14 +1,12 @@
 1. タスク完了率が70%を超えるチームをリストアップしてください。
 - SQL
     ```sql
-    SELECT teams.*
+    SELECT teams.*,
+	    (SELECT sum(status) / count(id)  FROM tasks WHERE team_id = teams.id) as taskdonerate
     FROM teams
-    WHERE
-        (SELECT count(*) FROM tasks WHERE status = 1 GROUP BY team_id)
-        /
-        (SELECT count(*) FROM tasks GROUP BY team_id)
-        >= 0.7
-    GROUP BY id
+    JOIN tasks ON teams.id = tasks.team_id
+    GROUP BY teams.id
+    HAVING taskdonerate >= 0.7
     ```
 
 2. 各ユーザーに割り当てられたタスクの平均期間を計算し、平均タスク期間が7日を超えるユーザーのみを含めてください。「タスクの期間」は「taskのupdated_atとcreated_atの差」で計算します。
