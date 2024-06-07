@@ -21,11 +21,13 @@
     ```sql
     SELECT users.*,
         AVG(DATEDIFF(
-            second,
-            SELECT created_at FROM tasks WHERE 
+        	tasks.updated_at,
+            tasks.created_at
         )) as average
     FROM users
     JOIN tasks ON users.id = tasks.assignee_id
+    GROUP BY users.id
+    HAVING average > 7
     ```
 
 3. チームごとに各タスクに対する平均コメント数を計算し、平均コメント数が2を超えるタスクのみを表示してください。
